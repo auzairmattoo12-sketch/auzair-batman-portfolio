@@ -6,7 +6,7 @@
 
 /* =====================================================
    CONTENT
-==================================================== */
+===================================================== */
 
 const achievements = [
 
@@ -1050,100 +1050,6 @@ function initializeMusicSystem() {
 
 
     /* -------------------------------------------------
-       Robust playback helpers (overlay fallback)
-    ------------------------------------------------- */
-
-    function showEnableSoundOverlay() {
-        if (document.getElementById("enable-sound-overlay")) return;
-
-        const overlay = document.createElement("div");
-        overlay.id = "enable-sound-overlay";
-        overlay.style.cssText = [
-            "position:fixed",
-            "inset:0",
-            "display:flex",
-            "align-items:center",
-            "justify-content:center",
-            "background:rgba(0,0,0,0.6)",
-            "z-index:2000",
-            "backdrop-filter: blur(4px)"
-        ].join(";");
-
-        const box = document.createElement("div");
-        box.style.cssText = [
-            "background:#0b0b0b",
-            "color:#f1f1f1",
-            "padding:18px 24px",
-            "border-radius:8px",
-            "text-align:center",
-            "font-family:Inter, sans-serif",
-            "box-shadow:0 10px 40px rgba(0,0,0,0.6)"
-        ].join(";");
-
-        box.innerHTML = `<div style="margin-bottom:8px;font-weight:600">Enable sound</div>
-                         <div style="font-size:13px;color:#aaa;margin-bottom:14px">Click to enable ambient audio</div>`;
-
-        const btn = document.createElement("button");
-        btn.textContent = "Enable sound";
-        btn.style.cssText = [
-            "background:#f5c542",
-            "border:none",
-            "color:#000",
-            "padding:10px 16px",
-            "border-radius:6px",
-            "cursor:pointer",
-            "font-weight:700"
-        ].join(";");
-
-        btn.addEventListener("click", async () => {
-            try {
-                // attempt to play; this is a user gesture so should succeed
-                await music.play();
-
-                musicControl.classList.add("active");
-                const label = musicToggle.querySelector(".music-label");
-                if (label) label.textContent = "SOUND ON";
-
-                // smooth fade-in to the configured volume
-                const targetVolume = clamp01(Number(musicVolume.value));
-                let volume = 0;
-                const fadeIn = setInterval(() => {
-                    volume += 0.02;
-                    music.volume = Math.min(Math.max(0, volume), targetVolume);
-                    if (volume >= targetVolume) clearInterval(fadeIn);
-                }, 50);
-
-                // hide overlay
-                overlay.remove();
-                document.body.style.overflow = "";
-
-            } catch (err) {
-                console.error("Enable sound playback failed:", err);
-            }
-        });
-
-        box.appendChild(btn);
-        overlay.appendChild(box);
-        document.body.appendChild(overlay);
-        document.body.style.overflow = "hidden";
-    }
-
-    async function tryPlayWithFallback() {
-        try {
-            const p = music.play();
-            if (p !== undefined) await p;
-            // success
-            musicControl.classList.add("active");
-            const label = musicToggle.querySelector(".music-label");
-            if (label) label.textContent = "SOUND ON";
-            return true;
-        } catch (err) {
-            // blocked by browser autoplay policies
-            return false;
-        }
-    }
-
-    /* -------------------------------------------------
        ENTER THE NIGHT
     ------------------------------------------------- */
 
@@ -1153,34 +1059,80 @@ function initializeMusicSystem() {
 
             music.volume = 0;
 
-            const started = await tryPlayWithFallback();
+            await music.play();
 
-            if (started) {
-                // Smooth fade-in
-                const targetVolume = clamp01(Number(musicVolume.value));
-                let volume = 0;
-                const fadeIn = setInterval(() => {
+            musicControl.classList.add("active");
+
+            const label =
+                musicToggle.querySelector(".music-label");
+
+            if (label) {
+                label.textContent = "SOUND ON";
+            }
+
+
+            /* Smooth fade-in */
+
+            const targetVolume =
+                clamp01(Number(musicVolume.value));
+
+            let volume = 0;
+
+            const fadeIn =
+                setInterval(() => {
+
                     volume += 0.02;
-                    music.volume = Math.min(Math.max(0, volume), targetVolume);
-                    if (volume >= targetVolume) clearInterval(fadeIn);
+
+                    music.volume =
+                        Math.min(
+                            Math.max(0, volume),
+                            targetVolume
+                        );
+
+                    if (volume >= targetVolume) {
+
+                        clearInterval(fadeIn);
+
+                    }
+
                 }, 50);
 
-                // Close loading screen and start effects
-                if (loadingScreen) loadingScreen.classList.add("loaded");
 
-                setTimeout(() => startFlyingBatarang(), 800);
+            /* Close loading screen */
 
-            } else {
-                // Autoplay blocked - open site but show overlay so user can enable sound
-                if (loadingScreen) loadingScreen.classList.add("loaded");
-                showEnableSoundOverlay();
+            if (loadingScreen) {
+
+                loadingScreen.classList.add("loaded");
+
             }
+
+
+            /* Start flying batarang */
+
+            setTimeout(() => {
+
+                startFlyingBatarang();
+
+            }, 800);
+
 
         } catch (error) {
 
-            console.error("Music playback failed:", error);
+            console.error(
+                "Music playback failed:",
+                error
+            );
 
-            if (loadingScreen) loadingScreen.classList.add("loaded");
+            /*
+             * Even if the browser refuses
+             * the audio, the portfolio still opens.
+             */
+
+            if (loadingScreen) {
+
+                loadingScreen.classList.add("loaded");
+
+            }
 
         }
 
@@ -1196,18 +1148,35 @@ function initializeMusicSystem() {
         try {
 
             if (music.paused) {
-                const started = await tryPlayWithFallback();
-                if (!started) showEnableSoundOverlay();
+
+                await music.play();
+
+                const label =
+                    musicToggle.querySelector(".music-label");
+
+                if (label) {
+                    label.textContent = "SOUND ON";
+                }
+
             } else {
+
                 music.pause();
-                const label = musicToggle.querySelector(".music-label");
-                if (label) label.textContent = "SOUND OFF";
+
+                const label =
+                    musicToggle.querySelector(".music-label");
+
+                if (label) {
+                    label.textContent = "SOUND OFF";
+                }
+
             }
 
         } catch (error) {
 
-            console.error("Music playback failed:", error);
-            showEnableSoundOverlay();
+            console.error(
+                "Music playback failed:",
+                error
+            );
 
         }
 
@@ -1230,135 +1199,168 @@ function initializeMusicSystem() {
 
 /* =====================================================
    LOADING SCREEN
-==================================================== */
+===================================================== */
 
 function initializeLoadingScreen() {
 
-    const screen =
-        document.getElementById(
-            "loading-screen"
-        );
+    try {
+        const screen =
+            document.getElementById(
+                "loading-screen"
+            );
 
-    const percent =
-        document.getElementById(
-            "loading-percent"
-        );
+        const percent =
+            document.getElementById(
+                "loading-percent"
+            );
 
-    const progress =
-        document.querySelector(
-            ".loader-progress"
-        );
+        const progress =
+            document.querySelector(
+                ".loader-progress"
+            );
 
-    const enterNight =
-        document.getElementById(
-            "enter-night"
-        );
-
-
-    if (!screen) {
-        return;
-    }
+        const enterNight =
+            document.getElementById(
+                "enter-night"
+            );
 
 
-    if (!percent || !progress) {
-
-        screen.classList.add("loaded");
-
-        return;
-
-    }
+        if (!screen) {
+            return;
+        }
 
 
-    let value = 0;
+        if (!percent || !progress) {
+
+            // If the expected loader elements are missing, ensure site still proceeds
+            screen.classList.add("loaded");
+            if (enterNight) enterNight.classList.add("visible");
+            setTimeout(() => startFlyingBatarang(), 300);
+            return;
+
+        }
 
 
-    const interval =
-        setInterval(() => {
-
-            value +=
-                Math.floor(
-                    Math.random() * 8
-                ) + 2;
+        let value = 0;
 
 
-            if (value >= 100) {
+        const interval =
+            setInterval(() => {
 
-                value = 100;
+                value +=
+                    Math.floor(
+                        Math.random() * 8
+                    ) + 2;
 
+
+                if (value >= 100) {
+
+                    value = 100;
+
+                    clearInterval(interval);
+
+                }
+
+
+                // show percent with percent sign
+                percent.textContent = `${value}%`;
+
+
+                progress.style.width =
+                    `${value}%`;
+
+
+                /* =========================================
+                   WHEN LOADING REACHES 100%
+                ========================================= */
+                if (value === 100) {
+
+                    /*
+                     * Stop at 100%.
+                     * The user must press ENTER THE NIGHT.
+                     */
+
+                    screen.classList.add("ready");
+
+                }
+
+                /* -----------------------------------------
+                   SHOW ENTER BUTTON
+                ----------------------------------------- */
+
+                if (
+                    value === 100
+                ) {
+
+                    setTimeout(() => {
+
+                        if (enterNight) {
+
+                            enterNight.classList.add(
+                                "visible"
+                            );
+
+                        } else {
+
+                            /*
+                             Fallback:
+                             If the button doesn't exist,
+                             don't leave the visitor stuck.
+                            */
+
+                            screen.classList.add(
+                                "loaded"
+                            );
+
+                            setTimeout(() => {
+
+                                startFlyingBatarang();
+
+                            }, 800);
+
+                        }
+
+                    }, 500);
+
+                }
+
+            }, 45);
+
+        // safety fallback: if something blocks the loader, force open after 7s
+        const safety = setTimeout(() => {
+            try {
+                if (screen && !screen.classList.contains('loaded')) {
+                    screen.classList.add('loaded');
+                }
+                if (enterNight && !enterNight.classList.contains('visible')) {
+                    enterNight.classList.add('visible');
+                }
+                startFlyingBatarang();
                 clearInterval(interval);
-
+            } catch (e) {
+                console.error('Loader safety fallback failed:', e);
             }
+        }, 7000);
 
-
-            // show percent with percent sign
-            percent.textContent = `${value}%`;
-
-
-            progress.style.width =
-                `${value}%`;
-
-
-            /* =========================================
-               WHEN LOADING REACHES 100%
-            ========================================= */
-          if (value === 100) {
-
-               /*
-                * Stop at 100%.
-                * The user must press ENTER THE NIGHT.
-                */
-
-           screen.classList.add("ready");
-
-}
-
-            /* -----------------------------------------
-               SHOW ENTER BUTTON
-            ----------------------------------------- */
-
-            if (
-                value === 100
-            ) {
-
-                setTimeout(() => {
-
-                    if (enterNight) {
-
-                        enterNight.classList.add(
-                            "visible"
-                        );
-
-                    } else {
-
-                        /*
-                         Fallback:
-                         If the button doesn't exist,
-                         don't leave the visitor stuck.
-                        */
-
-                        screen.classList.add(
-                            "loaded"
-                        );
-
-                        setTimeout(() => {
-
-                            startFlyingBatarang();
-
-                        }, 800);
-
-                    }
-
-                }, 500);
-
-            }
-
-        }, 45);
+    } catch (err) {
+        console.error('initializeLoadingScreen error:', err);
+        // ensure the site becomes usable even if the loader fails
+        try {
+            const screen = document.getElementById('loading-screen');
+            const enterNight = document.getElementById('enter-night');
+            if (screen) screen.classList.add('loaded');
+            if (enterNight) enterNight.classList.add('visible');
+            setTimeout(() => startFlyingBatarang(), 300);
+        } catch (e) {
+            console.error('Loader recovery failed:', e);
+        }
+    }
 
 }
 
 /* =====================================================
    RANDOM FLYING BATARANG
-==================================================== */
+===================================================== */
 
 function startFlyingBatarang() {
 
@@ -1503,5 +1505,3 @@ function startFlyingBatarang() {
     fly();
 
 }
-
-
