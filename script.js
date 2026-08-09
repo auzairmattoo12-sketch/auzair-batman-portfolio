@@ -1018,22 +1018,194 @@ function initializeMusicSystem() {
         document.getElementById("enter-night");
 
 
-    if (
-        !music ||
-        !musicToggle ||
-        !musicVolume ||
-        !musicControl ||
-        !enterNight
-    ) {
+    /*
+       IMPORTANT:
+       If anything is missing, simply stop the
+       music system. NEVER stop the portfolio.
+    */
 
-        console.error(
-            "Music system elements missing."
+    if (!music || !musicToggle || !musicVolume ||
+        !musicControl || !enterNight) {
+
+        console.warn(
+            "Music system unavailable. Portfolio will continue normally."
         );
 
         return;
-
     }
 
+
+    /* Default volume */
+
+    music.volume = 0.28;
+
+
+    /* =================================================
+       ENTER THE NIGHT
+    ================================================= */
+
+    enterNight.addEventListener("click", function () {
+
+        /*
+           Start music only after user interaction.
+        */
+
+        music.volume = 0;
+
+        const playPromise =
+            music.play();
+
+
+        if (playPromise !== undefined) {
+
+            playPromise
+                .then(() => {
+
+                    musicControl.classList.add("active");
+
+                    musicToggle
+                        .querySelector(".music-label")
+                        .textContent =
+                        "SOUND ON";
+
+
+                    /* Fade music in */
+
+                    let volume = 0;
+
+                    const fade =
+                        setInterval(() => {
+
+                            volume += 0.01;
+
+                            music.volume =
+                                Math.min(
+                                    volume,
+                                    Number(
+                                        musicVolume.value
+                                    )
+                                );
+
+
+                            if (
+                                volume >=
+                                Number(
+                                    musicVolume.value
+                                )
+                            ) {
+
+                                clearInterval(fade);
+
+                            }
+
+                        }, 40);
+
+                })
+                .catch(error => {
+
+                    console.warn(
+                        "Music could not play:",
+                        error
+                    );
+
+                });
+
+        }
+
+
+        /*
+           Close loading screen regardless of
+           whether the music works.
+        */
+
+        const loadingScreen =
+            document.getElementById(
+                "loading-screen"
+            );
+
+
+        if (loadingScreen) {
+
+            loadingScreen.classList.add(
+                "loaded"
+            );
+
+        }
+
+
+        /*
+           Start flying Batarang.
+        */
+
+        setTimeout(() => {
+
+            startFlyingBatarang();
+
+        }, 800);
+
+    });
+
+
+    /* =================================================
+       PLAY / PAUSE
+    ================================================= */
+
+    musicToggle.addEventListener(
+        "click",
+        function () {
+
+            if (music.paused) {
+
+                music.play()
+                    .then(() => {
+
+                        musicToggle
+                            .querySelector(".music-label")
+                            .textContent =
+                            "SOUND ON";
+
+                    })
+                    .catch(error => {
+
+                        console.warn(
+                            "Music could not play:",
+                            error
+                        );
+
+                    });
+
+            } else {
+
+                music.pause();
+
+                musicToggle
+                    .querySelector(".music-label")
+                    .textContent =
+                    "SOUND OFF";
+
+            }
+
+        }
+    );
+
+
+    /* =================================================
+       VOLUME
+    ================================================= */
+
+    musicVolume.addEventListener(
+        "input",
+        function () {
+
+            music.volume =
+                Number(
+                    musicVolume.value
+                );
+
+        }
+    );
+
+}
 
     /* -------------------------------------------------
        DEFAULT VOLUME
