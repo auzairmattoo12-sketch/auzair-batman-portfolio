@@ -1,6 +1,6 @@
 /* =========================================
 AUZAIR MATTOO PORTFOLIO
-CONTENT + INTERACTION SYSTEM
+CONTENT SYSTEM
 ========================================= */
 
 /* =========================================
@@ -21,6 +21,7 @@ const achievements = [
     image: ""
 },
 
+
 {
     year: "2026",
 
@@ -31,6 +32,7 @@ const achievements = [
 
     image: ""
 },
+
 
 {
     year: "COMING SOON",
@@ -219,24 +221,28 @@ menuButton.addEventListener(
 CLOSE MOBILE MENU
 ========================================= */
 
+if (navLinks) {
+
+```
 document
-.querySelectorAll(".nav-links a")
-.forEach(link => {
+    .querySelectorAll(".nav-links a")
+    .forEach(link => {
 
-```
-    link.addEventListener(
-        "click",
-        () => {
+        link.addEventListener(
+            "click",
+            () => {
 
-            if (navLinks) {
-                navLinks.classList.remove("active");
+                navLinks.classList.remove(
+                    "active"
+                );
+
             }
+        );
 
-        }
-    );
-
-});
+    });
 ```
+
+}
 
 /* =========================================
 RENDER ACHIEVEMENTS
@@ -251,6 +257,7 @@ const timeline =
 if (!timeline) return;
 
 timeline.innerHTML = "";
+
 
 achievements.forEach(
     achievement => {
@@ -282,14 +289,16 @@ achievements.forEach(
 
                 ${
                     achievement.image
-                        ? `
-                            <img
-                                src="${achievement.image}"
-                                alt="${achievement.title}"
-                                class="achievement-image"
-                            >
-                        `
-                        : ""
+                    ?
+                    `
+                    <img
+                        src="${achievement.image}"
+                        alt="${achievement.title}"
+                        class="achievement-image"
+                    >
+                    `
+                    :
+                    ""
                 }
 
             </div>
@@ -334,14 +343,16 @@ posts.forEach(
 
             ${
                 post.image
-                    ? `
-                        <img
-                            src="${post.image}"
-                            alt="${post.title}"
-                            class="post-image"
-                        >
-                    `
-                    : ""
+                ?
+                `
+                <img
+                    src="${post.image}"
+                    alt="${post.title}"
+                    class="post-image"
+                >
+                `
+                :
+                ""
             }
 
 
@@ -419,157 +430,137 @@ if (!projectsGrid) return;
 projectsGrid.innerHTML = "";
 
 
-projects.forEach(
-    project => {
+projects.forEach(project => {
 
-        const article =
-            document.createElement("article");
-
-
-        article.className =
-            project.featured
-                ? "project-card featured"
-                : "project-card";
+    const article =
+        document.createElement("article");
 
 
-        const imageHTML =
-            project.image
-
-                ? `
-
-                    <div class="project-image has-image">
-
-                        <img
-                            src="${project.image}"
-                            alt="${project.title}"
-                        >
-
-                    </div>
-
-                `
-
-                : `
-
-                    <div class="project-image">
-
-                        <span>
-                            ${project.title}
-                        </span>
-
-                    </div>
-
-                `;
+    article.className =
+        project.featured
+            ? "project-card featured"
+            : "project-card";
 
 
-        const technologiesHTML =
-            project.technologies
-                .map(
-                    technology =>
-                        `<span>${technology}</span>`
-                )
-                .join("");
+    const imageHTML =
+        project.image
+        ?
+        `
+        <div class="project-image has-image">
 
+            <img
+                src="${project.image}"
+                alt="${project.title}"
+            >
 
-        const githubHTML =
-            project.github &&
-            project.github !== "#"
+        </div>
+        `
+        :
+        `
+        <div class="project-image">
 
-                ? `
+            <span>
+                ${project.title}
+            </span>
 
-                    <a
-                        href="${project.github}"
-                        target="_blank"
-                        rel="noopener"
-                    >
-                        GITHUB →
-                    </a>
-
-                `
-
-                : "";
-
-
-        const liveHTML =
-            project.live &&
-            project.live !== "#"
-
-                ? `
-
-                    <a
-                        href="${project.live}"
-                        target="_blank"
-                        rel="noopener"
-                    >
-                        LIVE DEMO →
-                    </a>
-
-                `
-
-                : "";
-
-
-        article.innerHTML = `
-
-            ${imageHTML}
-
-
-            <div class="project-content">
-
-                <p class="project-type">
-                    ${project.category}
-                </p>
-
-
-                <h3>
-                    ${project.title}
-                </h3>
-
-
-                <p>
-                    ${project.description}
-                </p>
-
-
-                <div class="project-tags">
-
-                    ${technologiesHTML}
-
-                </div>
-
-
-                ${
-                    githubHTML || liveHTML
-
-                        ? `
-
-                            <div class="project-buttons">
-
-                                ${githubHTML}
-
-                                ${liveHTML}
-
-                            </div>
-
-                        `
-
-                        : ""
-                }
-
-            </div>
-
+        </div>
         `;
 
 
-        projectsGrid.appendChild(article);
+    const technologiesHTML =
+        project.technologies
+            .map(
+                technology =>
+                    `<span>${technology}</span>`
+            )
+            .join("");
 
-    }
-);
+
+    const githubHTML =
+        project.github &&
+        project.github !== "#"
+        ?
+        `
+        <a
+            href="${project.github}"
+            target="_blank"
+            rel="noopener"
+        >
+            GITHUB →
+        </a>
+        `
+        :
+        "";
+
+
+    const liveHTML =
+        project.live &&
+        project.live !== "#"
+        ?
+        `
+        <a
+            href="${project.live}"
+            target="_blank"
+            rel="noopener"
+        >
+            LIVE DEMO →
+        </a>
+        `
+        :
+        "";
+
+
+    article.innerHTML = `
+
+        ${imageHTML}
+
+
+        <div class="project-content">
+
+            <p class="project-type">
+                ${project.category}
+            </p>
+
+
+            <h3>
+                ${project.title}
+            </h3>
+
+
+            <p>
+                ${project.description}
+            </p>
+
+
+            <div class="project-tags">
+
+                ${technologiesHTML}
+
+            </div>
+
+
+            <div class="project-buttons">
+
+                ${githubHTML}
+
+                ${liveHTML}
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    projectsGrid.appendChild(article);
+
+});
 ```
 
 }
 
 /* =========================================
-POST READER
+POST READER / MODAL
 ========================================= */
 
 function openPost(post) {
@@ -609,16 +600,16 @@ modal.innerHTML = `
 
         ${
             post.image
-                ? `
-
-                    <img
-                        src="${post.image}"
-                        alt="${post.title}"
-                        class="modal-post-image"
-                    >
-
-                `
-                : ""
+            ?
+            `
+            <img
+                src="${post.image}"
+                alt="${post.title}"
+                class="modal-post-image"
+            >
+            `
+            :
+            ""
         }
 
 
@@ -638,30 +629,27 @@ modal.innerHTML = `
 
 document.body.appendChild(modal);
 
+
 document.body.style.overflow =
     "hidden";
 
 
-/* CLOSE BUTTON */
+const closeModal = () => {
 
-const closeButton =
-    modal.querySelector(".close-post");
+    modal.remove();
 
+    document.body.style.overflow = "";
 
-closeButton.addEventListener(
-    "click",
-    () => {
-
-        modal.remove();
-
-        document.body.style.overflow =
-            "";
-
-    }
-);
+};
 
 
-/* CLICK OUTSIDE */
+modal
+    .querySelector(".close-post")
+    .addEventListener(
+        "click",
+        closeModal
+    );
+
 
 modal.addEventListener(
     "click",
@@ -669,10 +657,7 @@ modal.addEventListener(
 
         if (event.target === modal) {
 
-            modal.remove();
-
-            document.body.style.overflow =
-                "";
+            closeModal();
 
         }
 
@@ -680,26 +665,17 @@ modal.addEventListener(
 );
 
 
-/* ESCAPE KEY */
-
 document.addEventListener(
     "keydown",
-    function closeWithEscape(event) {
+    function escapeHandler(event) {
 
         if (event.key === "Escape") {
 
-            if (document.body.contains(modal)) {
-
-                modal.remove();
-
-                document.body.style.overflow =
-                    "";
-
-            }
+            closeModal();
 
             document.removeEventListener(
                 "keydown",
-                closeWithEscape
+                escapeHandler
             );
 
         }
@@ -714,14 +690,35 @@ document.addEventListener(
 SCROLL REVEAL
 ========================================= */
 
-const revealElements =
-document.querySelectorAll(
-".section, .skill-card, .project-card, .post-card"
-);
-
-if ("IntersectionObserver" in window) {
+function setupScrollReveal() {
 
 ```
+const revealElements =
+    document.querySelectorAll(
+        ".section, .skill-card, .project-card, .post-card"
+    );
+
+
+if (
+    !("IntersectionObserver" in window)
+) {
+
+    revealElements.forEach(
+        element => {
+
+            element.classList.add(
+                "reveal",
+                "visible"
+            );
+
+        }
+    );
+
+    return;
+
+}
+
+
 const observer =
     new IntersectionObserver(
 
@@ -734,10 +731,9 @@ const observer =
                         entry.isIntersecting
                     ) {
 
-                        entry.target
-                            .classList
-                            .add("visible");
-
+                        entry.target.classList.add(
+                            "visible"
+                        );
 
                         observer.unobserve(
                             entry.target
@@ -773,63 +769,52 @@ revealElements.forEach(
 }
 
 /* =========================================
-START CONTENT SYSTEM
+MOUSE GLOW
 ========================================= */
 
-renderAchievements();
+function setupMouseGlow() {
 
-renderPosts();
-
-renderProjects();
-
-/* =========================================
-CONSOLE MESSAGE
-========================================= */
-
-console.log(
-"🦇 Auzair Mattoo Portfolio System Online."
-);
-
-/* =========================================
-CINEMATIC MOUSE GLOW
-========================================= */
-
+```
 const mouseGlow =
-document.querySelector(".mouse-glow");
+    document.querySelector(
+        ".mouse-glow"
+    );
+
+
+if (!mouseGlow) return;
+
 
 document.addEventListener(
-"mousemove",
-event => {
+    "mousemove",
+    event => {
 
+        mouseGlow.style.left =
+            `${event.clientX}px`;
+
+        mouseGlow.style.top =
+            `${event.clientY}px`;
+
+    }
+);
 ```
-    if (!mouseGlow) return;
-
-
-    mouseGlow.style.left =
-        `${event.clientX}px`;
-
-
-    mouseGlow.style.top =
-        `${event.clientY}px`;
 
 }
-```
-
-);
 
 /* =========================================
 CARD MOUSE SPOTLIGHT
 ========================================= */
 
-const interactiveCards =
-document.querySelectorAll(
-".skill-card, .project-card, .post-card"
-);
-
-interactiveCards.forEach(
-card => {
+function setupCardSpotlight() {
 
 ```
+const interactiveCards =
+    document.querySelectorAll(
+        ".skill-card, .project-card, .post-card"
+    );
+
+
+interactiveCards.forEach(card => {
+
     card.addEventListener(
         "mousemove",
         event => {
@@ -839,13 +824,11 @@ card => {
 
 
             const x =
-                event.clientX -
-                rect.left;
+                event.clientX - rect.left;
 
 
             const y =
-                event.clientY -
-                rect.top;
+                event.clientY - rect.top;
 
 
             card.style.setProperty(
@@ -862,21 +845,27 @@ card => {
         }
     );
 
-}
+});
 ```
 
-);
+}
 
 /* =========================================
-CINEMATIC BACKGROUND PARALLAX
+BACKGROUND PARALLAX
 ========================================= */
 
-const heroArt =
-document.querySelector(".hero-art");
-
-if (heroArt) {
+function setupBackgroundParallax() {
 
 ```
+const heroArt =
+    document.querySelector(
+        ".hero-art"
+    );
+
+
+if (!heroArt) return;
+
+
 document.addEventListener(
     "mousemove",
     event => {
@@ -916,17 +905,8 @@ document.addEventListener(
 
     }
 );
-```
 
-}
 
-/* =========================================
-SCROLL PARALLAX
-========================================= */
-
-if (heroArt) {
-
-```
 window.addEventListener(
     "scroll",
     () => {
@@ -955,77 +935,82 @@ window.addEventListener(
 HERO SCROLL FADE
 ========================================= */
 
+function setupHeroFade() {
+
+```
 const heroContent =
-document.querySelector(".hero-content");
+    document.querySelector(
+        ".hero-content"
+    );
+
 
 const heroCard =
-document.querySelector(".hero-card");
+    document.querySelector(
+        ".hero-card"
+    );
+
 
 window.addEventListener(
-"scroll",
-() => {
+    "scroll",
+    () => {
 
-```
-    const scroll =
-        window.scrollY;
-
-
-    const fadeStart =
-        100;
+        const scroll =
+            window.scrollY;
 
 
-    const fadeEnd =
-        window.innerHeight * 0.8;
+        const fadeStart = 100;
 
 
-    let opacity =
-        1 -
-        (
-            (scroll - fadeStart) /
-            (fadeEnd - fadeStart)
-        );
+        const fadeEnd =
+            window.innerHeight * 0.8;
 
 
-    opacity =
-        Math.max(
-            0,
-            Math.min(
-                1,
-                opacity
-            )
-        );
+        let opacity =
+            1 -
+            (
+                (scroll - fadeStart) /
+                (fadeEnd - fadeStart)
+            );
 
 
-    if (heroContent) {
-
-        heroContent.style.opacity =
-            opacity;
-
-
-        heroContent.style.transform =
-            `translateY(${scroll * 0.12}px)`;
-
-    }
+        opacity =
+            Math.max(
+                0,
+                Math.min(1, opacity)
+            );
 
 
-    if (heroCard) {
+        if (heroContent) {
 
-        heroCard.style.opacity =
-            opacity;
+            heroContent.style.opacity =
+                opacity;
 
 
-        heroCard.style.transform =
-            `
+            heroContent.style.transform =
+                `translateY(${scroll * 0.12}px)`;
+
+        }
+
+
+        if (heroCard) {
+
+            heroCard.style.opacity =
+                opacity;
+
+
+            heroCard.style.transform =
+                `
                 rotate(2deg)
                 translateY(${scroll * 0.08}px)
-            `;
+                `;
+
+        }
 
     }
-
-}
+);
 ```
 
-);
+}
 
 /* =========================================
 CINEMATIC LOADING SYSTEM
@@ -1037,8 +1022,8 @@ document.getElementById(
 );
 
 const loadingPercent =
-document.querySelector(
-".loader-percent"
+document.getElementById(
+"loading-percent"
 );
 
 const loadingProgress =
@@ -1046,20 +1031,21 @@ document.querySelector(
 ".loader-progress"
 );
 
-let loadingValue = 0;
-
 function runLoadingScreen() {
 
 ```
 if (!loadingScreen) {
 
-    console.error(
-        "Loading screen not found."
+    console.warn(
+        "Loading screen element not found."
     );
 
     return;
 
 }
+
+
+let loadingValue = 0;
 
 
 const loadingInterval =
@@ -1068,8 +1054,8 @@ const loadingInterval =
 
             loadingValue +=
                 Math.floor(
-                    Math.random() * 7
-                ) + 1;
+                    Math.random() * 6
+                ) + 2;
 
 
             if (
@@ -1088,7 +1074,7 @@ const loadingInterval =
             if (loadingPercent) {
 
                 loadingPercent.textContent =
-                    `${loadingValue}%`;
+                    loadingValue;
 
             }
 
@@ -1096,13 +1082,13 @@ const loadingInterval =
             if (loadingProgress) {
 
                 loadingProgress.style.width =
-                    `${loadingValue}%`;
+                    loadingValue + "%";
 
             }
 
 
             if (
-                loadingValue === 100
+                loadingValue >= 100
             ) {
 
                 setTimeout(
@@ -1135,8 +1121,6 @@ const loadingInterval =
 
 }
 
-runLoadingScreen();
-
 /* =========================================
 RANDOM FLYING BATARANG
 ========================================= */
@@ -1146,10 +1130,7 @@ document.getElementById(
 "flying-batarang"
 );
 
-function randomNumber(
-min,
-max
-) {
+function randomNumber(min, max) {
 
 ```
 return Math.random() *
@@ -1232,15 +1213,19 @@ function fly() {
         "0";
 
 
+    flyingBatarang.style.transform =
+        "rotate(0deg)";
+
+
     requestAnimationFrame(
         () => {
 
             flyingBatarang.style.transition =
                 `
-                    left ${duration}ms cubic-bezier(.2,.7,.2,1),
-                    top ${duration}ms cubic-bezier(.2,.7,.2,1),
-                    transform ${duration}ms linear,
-                    opacity 350ms ease
+                left ${duration}ms cubic-bezier(.2,.7,.2,1),
+                top ${duration}ms cubic-bezier(.2,.7,.2,1),
+                transform ${duration}ms linear,
+                opacity 350ms ease
                 `;
 
 
@@ -1290,8 +1275,6 @@ function fly() {
 }
 
 
-/* First appearance */
-
 setTimeout(
     () => {
 
@@ -1300,6 +1283,67 @@ setTimeout(
     },
     1800
 );
+```
+
+}
+
+/* =========================================
+START EVERYTHING
+========================================= */
+
+function initializePortfolio() {
+
+```
+renderAchievements();
+
+renderPosts();
+
+renderProjects();
+
+setupScrollReveal();
+
+setupMouseGlow();
+
+setupCardSpotlight();
+
+setupBackgroundParallax();
+
+setupHeroFade();
+
+console.log(
+    "🦇 Auzair Mattoo Portfolio System Online."
+);
+```
+
+}
+
+/* =========================================
+INITIALIZATION
+========================================= */
+
+if (
+document.readyState === "loading"
+) {
+
+```
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        initializePortfolio();
+
+        runLoadingScreen();
+
+    }
+);
+```
+
+} else {
+
+```
+initializePortfolio();
+
+runLoadingScreen();
 ```
 
 }
