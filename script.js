@@ -1233,9 +1233,9 @@ function initializeLoadingScreen() {
         if (!percent || !progress) {
 
             // If the expected loader elements are missing, ensure site still proceeds
-            screen.classList.add("loaded");
+            // Reveal the enter button but do not auto-close the loader; preserve visuals
+            screen.classList.add("ready");
             if (enterNight) enterNight.classList.add("visible");
-            setTimeout(() => startFlyingBatarang(), 300);
             return;
 
         }
@@ -1326,16 +1326,16 @@ function initializeLoadingScreen() {
 
             }, 45);
 
-        // safety fallback: if something blocks the loader, force open after 7s
+        // safety fallback: if something blocks the loader, reveal the enter button after 7s
         const safety = setTimeout(() => {
             try {
-                if (screen && !screen.classList.contains('loaded')) {
-                    screen.classList.add('loaded');
-                }
                 if (enterNight && !enterNight.classList.contains('visible')) {
                     enterNight.classList.add('visible');
                 }
-                startFlyingBatarang();
+                if (screen && !screen.classList.contains('ready')) {
+                    screen.classList.add('ready');
+                }
+                // do not auto-close the loading screen; let the user click ENTER THE NIGHT
                 clearInterval(interval);
             } catch (e) {
                 console.error('Loader safety fallback failed:', e);
@@ -1344,13 +1344,12 @@ function initializeLoadingScreen() {
 
     } catch (err) {
         console.error('initializeLoadingScreen error:', err);
-        // ensure the site becomes usable even if the loader fails
+        // ensure the site becomes usable even if the loader fails — reveal button only
         try {
             const screen = document.getElementById('loading-screen');
             const enterNight = document.getElementById('enter-night');
-            if (screen) screen.classList.add('loaded');
+            if (screen) screen.classList.add('ready');
             if (enterNight) enterNight.classList.add('visible');
-            setTimeout(() => startFlyingBatarang(), 300);
         } catch (e) {
             console.error('Loader recovery failed:', e);
         }
