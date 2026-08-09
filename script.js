@@ -1,231 +1,266 @@
 /* =========================================
-   AUZAIR MATTOO PORTFOLIO
-   CONTENT SYSTEM
+AUZAIR MATTOO PORTFOLIO
+CONTENT + INTERACTION SYSTEM
 ========================================= */
 
-
 /* =========================================
-   EDIT ACHIEVEMENTS HERE
+EDIT ACHIEVEMENTS HERE
 ========================================= */
 
 const achievements = [
 
-    {
-        year: "2026",
-        title: "B.Tech Journey Begins",
-        description:
-            "Started my engineering journey with a focus on Artificial Intelligence.",
-        image: ""
-    },
+```
+{
+    year: "2026",
 
-    {
-        year: "2026",
-        title: "Portfolio System",
-        description:
-            "Designed and developed my personal developer portfolio from scratch.",
-        image: ""
-    },
+    title: "B.Tech Journey Begins",
 
-    {
-        year: "COMING SOON",
-        title: "First Major AI Project",
-        description:
-            "A new AI project will be added here when completed.",
-        image: ""
-    }
+    description:
+        "Started my engineering journey with a focus on Artificial Intelligence.",
+
+    image: ""
+},
+
+{
+    year: "2026",
+
+    title: "Portfolio System",
+
+    description:
+        "Designed and developed my personal developer portfolio from scratch.",
+
+    image: ""
+},
+
+{
+    year: "COMING SOON",
+
+    title: "First Major AI Project",
+
+    description:
+        "A new AI project will be added here when completed.",
+
+    image: ""
+}
+```
 
 ];
 
-
 /* =========================================
-   EDIT POSTS HERE
+EDIT POSTS HERE
 ========================================= */
 
 const posts = [
 
-    {
-        date: "AUG 2026",
+```
+{
+    date: "AUG 2026",
 
-        category: "JOURNEY",
+    category: "JOURNEY",
 
-        title: "Why I Built This Portfolio",
+    title: "Why I Built This Portfolio",
 
-        excerpt:
-            "A look at why I decided to create my own digital headquarters and document my journey into technology and AI.",
+    excerpt:
+        "A look at why I decided to create my own digital headquarters and document my journey into technology and AI.",
 
-        content:
-            "This portfolio is more than just a website. It is a place where I can document projects, achievements, experiments, ideas and everything I build throughout my engineering journey.",
+    content:
+        "This portfolio is more than just a website. It is a place where I can document projects, achievements, experiments, ideas and everything I build throughout my engineering journey.",
 
-        image: "",
+    image: "",
 
-        link: "#"
-    },
-
-
-    {
-        date: "COMING SOON",
-
-        category: "AI / MACHINE LEARNING",
-
-        title: "My First AI Project",
-
-        excerpt:
-            "Documenting the process of building my first major artificial intelligence project.",
-
-        content:
-            "This post will be updated when the project is completed.",
-
-        image: "",
-
-        link: "#"
-    },
+    link: "#"
+},
 
 
-    {
-        date: "COMING SOON",
+{
+    date: "COMING SOON",
 
-        category: "DEVELOPMENT",
+    category: "AI / MACHINE LEARNING",
 
-        title: "What I'm Learning",
+    title: "My First AI Project",
 
-        excerpt:
-            "A collection of technologies, programming concepts and tools I'm currently exploring.",
+    excerpt:
+        "Documenting the process of building my first major artificial intelligence project.",
 
-        content:
-            "This section will contain updates about the technologies and concepts I'm learning.",
+    content:
+        "This post will be updated when the project is completed.",
 
-        image: "",
+    image: "",
 
-        link: "#"
-    }
+    link: "#"
+},
+
+
+{
+    date: "COMING SOON",
+
+    category: "DEVELOPMENT",
+
+    title: "What I'm Learning",
+
+    excerpt:
+        "A collection of technologies, programming concepts and tools I'm currently exploring.",
+
+    content:
+        "This section will contain updates about the technologies and concepts I'm learning.",
+
+    image: "",
+
+    link: "#"
+}
+```
 
 ];
+
 /* =========================================
-   EDIT PROJECTS HERE
+EDIT PROJECTS HERE
 ========================================= */
 
 const projects = [
 
-    {
-        title: "Personal Portfolio",
+```
+{
+    title: "Personal Portfolio",
 
-        category: "WEB DEVELOPMENT",
+    category: "WEB DEVELOPMENT",
 
-        description:
-            "A Batman-inspired personal portfolio built from scratch using HTML, CSS and JavaScript.",
+    description:
+        "A Batman-inspired personal portfolio built from scratch using HTML, CSS and JavaScript.",
 
-        image: "",
+    image: "",
 
-        technologies: [
-            "HTML",
-            "CSS",
-            "JAVASCRIPT"
-        ],
+    technologies: [
+        "HTML",
+        "CSS",
+        "JAVASCRIPT"
+    ],
 
-        github: "#",
+    github: "#",
 
-        live: "#",
+    live: "#",
 
-        featured: true
-    },
-
-
-    {
-        title: "AI Project",
-
-        category: "ARTIFICIAL INTELLIGENCE",
-
-        description:
-            "My upcoming artificial intelligence project. Details will be added after development begins.",
-
-        image: "",
-
-        technologies: [
-            "PYTHON",
-            "AI"
-        ],
-
-        github: "#",
-
-        live: "#",
-
-        featured: false
-    },
+    featured: true
+},
 
 
-    {
-        title: "Future Project",
+{
+    title: "AI Project",
 
-        category: "EXPERIMENT",
+    category: "ARTIFICIAL INTELLIGENCE",
 
-        description:
-            "A future project that will be added to the portfolio.",
+    description:
+        "My upcoming artificial intelligence project. Details will be added after development begins.",
 
-        image: "",
+    image: "",
 
-        technologies: [
-            "COMING SOON"
-        ],
+    technologies: [
+        "PYTHON",
+        "AI"
+    ],
 
-        github: "#",
+    github: "#",
 
-        live: "#",
+    live: "#",
 
-        featured: false
-    }
+    featured: false
+},
+
+
+{
+    title: "Future Project",
+
+    category: "EXPERIMENT",
+
+    description:
+        "A future project that will be added to the portfolio.",
+
+    image: "",
+
+    technologies: [
+        "COMING SOON"
+    ],
+
+    github: "#",
+
+    live: "#",
+
+    featured: false
+}
+```
 
 ];
 
 /* =========================================
-   MOBILE MENU
+MOBILE MENU
 ========================================= */
 
-const menuButton = document.getElementById("menuButton");
-const navLinks = document.querySelector(".nav-links");
+const menuButton =
+document.getElementById("menuButton");
 
-if (menuButton) {
+const navLinks =
+document.querySelector(".nav-links");
 
-    menuButton.addEventListener("click", () => {
+if (menuButton && navLinks) {
+
+```
+menuButton.addEventListener(
+    "click",
+    () => {
 
         navLinks.classList.toggle("active");
 
-    });
+    }
+);
+```
 
 }
 
-
 /* =========================================
-   CLOSE MOBILE MENU
+CLOSE MOBILE MENU
 ========================================= */
 
-document.querySelectorAll(".nav-links a").forEach(link => {
+document
+.querySelectorAll(".nav-links a")
+.forEach(link => {
 
-    link.addEventListener("click", () => {
+```
+    link.addEventListener(
+        "click",
+        () => {
 
-        navLinks.classList.remove("active");
+            if (navLinks) {
+                navLinks.classList.remove("active");
+            }
 
-    });
+        }
+    );
 
 });
-
+```
 
 /* =========================================
-   RENDER ACHIEVEMENTS
+RENDER ACHIEVEMENTS
 ========================================= */
 
 function renderAchievements() {
 
-    const timeline = document.querySelector(".timeline");
+```
+const timeline =
+    document.querySelector(".timeline");
 
-    if (!timeline) return;
+if (!timeline) return;
 
-    timeline.innerHTML = "";
+timeline.innerHTML = "";
 
-    achievements.forEach(achievement => {
+achievements.forEach(
+    achievement => {
 
-        const item = document.createElement("div");
+        const item =
+            document.createElement("div");
 
-        item.className = "timeline-item";
+        item.className =
+            "timeline-item";
+
 
         item.innerHTML = `
 
@@ -233,82 +268,102 @@ function renderAchievements() {
 
             <div class="timeline-content">
 
-                <span>${achievement.year}</span>
+                <span>
+                    ${achievement.year}
+                </span>
 
-                <h3>${achievement.title}</h3>
+                <h3>
+                    ${achievement.title}
+                </h3>
 
-                <p>${achievement.description}</p>
+                <p>
+                    ${achievement.description}
+                </p>
 
                 ${
                     achievement.image
-                    ?
-                    `<img
-                        src="${achievement.image}"
-                        alt="${achievement.title}"
-                        class="achievement-image"
-                    >`
-                    :
-                    ""
+                        ? `
+                            <img
+                                src="${achievement.image}"
+                                alt="${achievement.title}"
+                                class="achievement-image"
+                            >
+                        `
+                        : ""
                 }
 
             </div>
 
         `;
 
+
         timeline.appendChild(item);
 
-    });
+    }
+);
+```
 
 }
 
-
 /* =========================================
-   RENDER POSTS
+RENDER POSTS
 ========================================= */
 
 function renderPosts() {
 
-    const postsGrid = document.querySelector(".posts-grid");
+```
+const postsGrid =
+    document.querySelector(".posts-grid");
 
-    if (!postsGrid) return;
+if (!postsGrid) return;
 
-    postsGrid.innerHTML = "";
+postsGrid.innerHTML = "";
 
-    posts.forEach((post, index) => {
 
-        const article = document.createElement("article");
+posts.forEach(
+    (post, index) => {
 
-        article.className = "post-card";
+        const article =
+            document.createElement("article");
+
+        article.className =
+            "post-card";
+
 
         article.innerHTML = `
 
             ${
                 post.image
-                ?
-                `<img
-                    src="${post.image}"
-                    alt="${post.title}"
-                    class="post-image"
-                >`
-                :
-                ""
+                    ? `
+                        <img
+                            src="${post.image}"
+                            alt="${post.title}"
+                            class="post-image"
+                        >
+                    `
+                    : ""
             }
+
 
             <span class="post-date">
                 ${post.date}
             </span>
 
+
             <span class="post-category">
                 ${post.category}
             </span>
+
 
             <h3>
                 ${post.title}
             </h3>
 
+
             <p>
                 ${post.excerpt}
             </p>
+
 
             <button
                 class="read-post"
@@ -319,65 +374,144 @@ function renderPosts() {
 
         `;
 
+
         postsGrid.appendChild(article);
 
+    }
+);
+
+
+/* READ MORE BUTTONS */
+
+postsGrid
+    .querySelectorAll(".read-post")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const index =
+                    Number(button.dataset.post);
+
+                openPost(posts[index]);
+
+            }
+        );
+
     });
+```
+
+}
+
 /* =========================================
-   RENDER PROJECTS
+RENDER PROJECTS
 ========================================= */
 
 function renderProjects() {
 
-    const projectsGrid =
-        document.querySelector(".projects-grid");
+```
+const projectsGrid =
+    document.querySelector(".projects-grid");
 
-    if (!projectsGrid) return;
+if (!projectsGrid) return;
 
-    projectsGrid.innerHTML = "";
+projectsGrid.innerHTML = "";
 
-    projects.forEach(project => {
+
+projects.forEach(
+    project => {
 
         const article =
             document.createElement("article");
+
 
         article.className =
             project.featured
                 ? "project-card featured"
                 : "project-card";
 
-        const imageHTML = project.image
-            ? `
-                <div class="project-image has-image">
 
-                    <img
-                        src="${project.image}"
-                        alt="${project.title}"
-                    >
+        const imageHTML =
+            project.image
 
-                </div>
-            `
-            : `
-                <div class="project-image">
+                ? `
 
-                    <span>
-                        ${project.title}
-                    </span>
+                    <div class="project-image has-image">
 
-                </div>
-            `;
+                        <img
+                            src="${project.image}"
+                            alt="${project.title}"
+                        >
+
+                    </div>
+
+                `
+
+                : `
+
+                    <div class="project-image">
+
+                        <span>
+                            ${project.title}
+                        </span>
+
+                    </div>
+
+                `;
 
 
         const technologiesHTML =
             project.technologies
-                .map(technology =>
-                    `<span>${technology}</span>`
+                .map(
+                    technology =>
+                        `<span>${technology}</span>`
                 )
                 .join("");
+
+
+        const githubHTML =
+            project.github &&
+            project.github !== "#"
+
+                ? `
+
+                    <a
+                        href="${project.github}"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        GITHUB →
+                    </a>
+
+                `
+
+                : "";
+
+
+        const liveHTML =
+            project.live &&
+            project.live !== "#"
+
+                ? `
+
+                    <a
+                        href="${project.live}"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        LIVE DEMO →
+                    </a>
+
+                `
+
+                : "";
 
 
         article.innerHTML = `
 
             ${imageHTML}
+
 
             <div class="project-content">
 
@@ -385,13 +519,16 @@ function renderProjects() {
                     ${project.category}
                 </p>
 
+
                 <h3>
                     ${project.title}
                 </h3>
 
+
                 <p>
                     ${project.description}
                 </p>
+
 
                 <div class="project-tags">
 
@@ -399,199 +536,244 @@ function renderProjects() {
 
                 </div>
 
-                <div class="project-buttons">
 
-                    ${
-                        project.github !== "#"
-                        ?
-                        `
-                        <a
-                            href="${project.github}"
-                            target="_blank"
-                            rel="noopener"
-                        >
-                            GITHUB →
-                        </a>
-                        `
-                        :
-                        ""
-                    }
+                ${
+                    githubHTML || liveHTML
 
-                    ${
-                        project.live !== "#"
-                        ?
-                        `
-                        <a
-                            href="${project.live}"
-                            target="_blank"
-                            rel="noopener"
-                        >
-                            LIVE DEMO →
-                        </a>
-                        `
-                        :
-                        ""
-                    }
+                        ? `
 
-                </div>
+                            <div class="project-buttons">
+
+                                ${githubHTML}
+
+                                ${liveHTML}
+
+                            </div>
+
+                        `
+
+                        : ""
+                }
 
             </div>
 
         `;
 
+
         projectsGrid.appendChild(article);
 
-    });
+    }
+);
+```
 
 }
-
-    /* READ MORE BUTTONS */
-
-    document.querySelectorAll(".read-post").forEach(button => {
-
-        button.addEventListener("click", () => {
-
-            const index = button.dataset.post;
-
-            openPost(posts[index]);
-
-        });
-
-    });
-
-}
-
 
 /* =========================================
-   POST READER
+POST READER
 ========================================= */
 
 function openPost(post) {
 
-    const modal = document.createElement("div");
-
-    modal.className = "post-modal";
-
-    modal.innerHTML = `
-
-        <div class="post-modal-box">
-
-            <button class="close-post">
-                ×
-            </button>
-
-            <span class="post-category">
-                ${post.category}
-            </span>
-
-            <span class="post-date">
-                ${post.date}
-            </span>
-
-            ${
-                post.image
-                ?
-                `<img
-                    src="${post.image}"
-                    alt="${post.title}"
-                    class="modal-post-image"
-                >`
-                :
-                ""
-            }
-
-            <h2>
-                ${post.title}
-            </h2>
-
-            <p>
-                ${post.content}
-            </p>
-
-        </div>
-
-    `;
-
-    document.body.appendChild(modal);
-
-    document.body.style.overflow = "hidden";
+```
+if (!post) return;
 
 
-    /* CLOSE */
+const modal =
+    document.createElement("div");
 
-    modal.querySelector(".close-post").addEventListener(
-        "click",
-        () => {
+modal.className =
+    "post-modal";
 
-            modal.remove();
 
-            document.body.style.overflow = "";
+modal.innerHTML = `
 
+    <div class="post-modal-box">
+
+        <button
+            class="close-post"
+            aria-label="Close post"
+        >
+            ×
+        </button>
+
+
+        <span class="post-category">
+            ${post.category}
+        </span>
+
+
+        <span class="post-date">
+            ${post.date}
+        </span>
+
+
+        ${
+            post.image
+                ? `
+
+                    <img
+                        src="${post.image}"
+                        alt="${post.title}"
+                        class="modal-post-image"
+                    >
+
+                `
+                : ""
         }
-    );
 
 
-    /* CLICK OUTSIDE */
+        <h2>
+            ${post.title}
+        </h2>
 
-    modal.addEventListener("click", event => {
+
+        <p>
+            ${post.content}
+        </p>
+
+    </div>
+
+`;
+
+
+document.body.appendChild(modal);
+
+document.body.style.overflow =
+    "hidden";
+
+
+/* CLOSE BUTTON */
+
+const closeButton =
+    modal.querySelector(".close-post");
+
+
+closeButton.addEventListener(
+    "click",
+    () => {
+
+        modal.remove();
+
+        document.body.style.overflow =
+            "";
+
+    }
+);
+
+
+/* CLICK OUTSIDE */
+
+modal.addEventListener(
+    "click",
+    event => {
 
         if (event.target === modal) {
 
             modal.remove();
 
-            document.body.style.overflow = "";
+            document.body.style.overflow =
+                "";
 
         }
 
-    });
-
-}
-
-
-/* =========================================
-   SCROLL REVEAL
-========================================= */
-
-const revealElements = document.querySelectorAll(
-    ".section, .skill-card, .project-card, .post-card"
+    }
 );
 
-const observer = new IntersectionObserver(
 
-    entries => {
+/* ESCAPE KEY */
 
-        entries.forEach(entry => {
+document.addEventListener(
+    "keydown",
+    function closeWithEscape(event) {
 
-            if (entry.isIntersecting) {
+        if (event.key === "Escape") {
 
-                entry.target.classList.add("visible");
+            if (document.body.contains(modal)) {
 
-                observer.unobserve(entry.target);
+                modal.remove();
+
+                document.body.style.overflow =
+                    "";
 
             }
 
-        });
+            document.removeEventListener(
+                "keydown",
+                closeWithEscape
+            );
 
-    },
+        }
 
-    {
-        threshold: 0.12
     }
-
 );
+```
 
-
-revealElements.forEach(element => {
-
-    element.classList.add("reveal");
-
-    observer.observe(element);
-
-});
-
+}
 
 /* =========================================
-   START CONTENT SYSTEM
+SCROLL REVEAL
+========================================= */
+
+const revealElements =
+document.querySelectorAll(
+".section, .skill-card, .project-card, .post-card"
+);
+
+if ("IntersectionObserver" in window) {
+
+```
+const observer =
+    new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target
+                            .classList
+                            .add("visible");
+
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+
+        {
+            threshold: 0.12
+        }
+
+    );
+
+
+revealElements.forEach(
+    element => {
+
+        element.classList.add(
+            "reveal"
+        );
+
+        observer.observe(element);
+
+    }
+);
+```
+
+}
+
+/* =========================================
+START CONTENT SYSTEM
 ========================================= */
 
 renderAchievements();
@@ -601,144 +783,150 @@ renderPosts();
 renderProjects();
 
 /* =========================================
-   CONSOLE MESSAGE
+CONSOLE MESSAGE
 ========================================= */
 
 console.log(
-    "🦇 Auzair Mattoo Portfolio System Online."
+"🦇 Auzair Mattoo Portfolio System Online."
 );
+
 /* =========================================
-   CINEMATIC MOUSE EFFECT
+CINEMATIC MOUSE GLOW
 ========================================= */
 
 const mouseGlow =
-    document.querySelector(".mouse-glow");
+document.querySelector(".mouse-glow");
 
-document.addEventListener("mousemove", event => {
+document.addEventListener(
+"mousemove",
+event => {
 
+```
     if (!mouseGlow) return;
+
 
     mouseGlow.style.left =
         `${event.clientX}px`;
 
+
     mouseGlow.style.top =
         `${event.clientY}px`;
 
-});
+}
+```
 
+);
 
 /* =========================================
-   CARD MOUSE SPOTLIGHT
+CARD MOUSE SPOTLIGHT
 ========================================= */
 
 const interactiveCards =
-    document.querySelectorAll(
-        ".skill-card, .project-card, .post-card"
-    );
+document.querySelectorAll(
+".skill-card, .project-card, .post-card"
+);
 
-interactiveCards.forEach(card => {
+interactiveCards.forEach(
+card => {
 
-    card.addEventListener("mousemove", event => {
-
-        const rect =
-            card.getBoundingClientRect();
-
-        const x =
-            event.clientX - rect.left;
-
-        const y =
-            event.clientY - rect.top;
-
-        card.style.setProperty(
-            "--mouse-x",
-            `${x}px`
-        );
-
-        card.style.setProperty(
-            "--mouse-y",
-            `${y}px`
-        );
-
-    });
-
-});
-/* =========================================
-   CINEMATIC BACKGROUND PARALLAX
-========================================= */
-
-const heroArt =
-    document.querySelector(".hero-art");
-
-if (heroArt) {
-
-    document.addEventListener(
+```
+    card.addEventListener(
         "mousemove",
         event => {
 
+            const rect =
+                card.getBoundingClientRect();
+
+
             const x =
-                (event.clientX /
-                    window.innerWidth) - 0.5;
+                event.clientX -
+                rect.left;
+
 
             const y =
-                (event.clientY /
-                    window.innerHeight) - 0.5;
+                event.clientY -
+                rect.top;
 
-            const moveX =
-                x * -14;
 
-            const moveY =
-                y * -10;
-
-            heroArt.style.setProperty(
-                "--parallax-x",
-                `${moveX}px`
+            card.style.setProperty(
+                "--mouse-x",
+                `${x}px`
             );
 
-            heroArt.style.setProperty(
-                "--parallax-y",
-                `${moveY}px`
+
+            card.style.setProperty(
+                "--mouse-y",
+                `${y}px`
             );
 
         }
     );
 
 }
+```
+
+);
 
 /* =========================================
-   SCROLL PARALLAX
+CINEMATIC BACKGROUND PARALLAX
+========================================= */
+
+const heroArt =
+document.querySelector(".hero-art");
+
+if (heroArt) {
+
+```
+document.addEventListener(
+    "mousemove",
+    event => {
+
+        const x =
+            (
+                event.clientX /
+                window.innerWidth
+            ) - 0.5;
+
+
+        const y =
+            (
+                event.clientY /
+                window.innerHeight
+            ) - 0.5;
+
+
+        const moveX =
+            x * -14;
+
+
+        const moveY =
+            y * -10;
+
+
+        heroArt.style.setProperty(
+            "--parallax-x",
+            `${moveX}px`
+        );
+
+
+        heroArt.style.setProperty(
+            "--parallax-y",
+            `${moveY}px`
+        );
+
+    }
+);
+```
+
+}
+
+/* =========================================
+SCROLL PARALLAX
 ========================================= */
 
 if (heroArt) {
 
-    window.addEventListener(
-        "scroll",
-        () => {
-
-            const scroll =
-                window.scrollY;
-
-            if (scroll < window.innerHeight) {
-
-                heroArt.style.backgroundPosition =
-                    `center ${50 + scroll * 0.025}%`;
-
-            }
-
-        }
-    );
-
-}
-
-/* =========================================
-   HERO SCROLL FADE
-========================================= */
-
-const heroContent =
-    document.querySelector(".hero-content");
-
-const heroCard =
-    document.querySelector(".hero-card");
-
+```
 window.addEventListener(
     "scroll",
     () => {
@@ -746,206 +934,314 @@ window.addEventListener(
         const scroll =
             window.scrollY;
 
-        const fadeStart = 100;
 
-        const fadeEnd =
-            window.innerHeight * 0.8;
+        if (
+            scroll <
+            window.innerHeight
+        ) {
 
-        let opacity =
-            1 -
-            (
-                (scroll - fadeStart) /
-                (fadeEnd - fadeStart)
-            );
-
-        opacity =
-            Math.max(
-                0,
-                Math.min(1, opacity)
-            );
-
-        if (heroContent) {
-
-            heroContent.style.opacity =
-                opacity;
-
-            heroContent.style.transform =
-                `translateY(${scroll * 0.12}px)`;
-
-        }
-
-        if (heroCard) {
-
-            heroCard.style.opacity =
-                opacity;
-
-            heroCard.style.transform =
-                `
-                rotate(2deg)
-                translateY(${scroll * 0.08}px)
-                `;
+            heroArt.style.backgroundPosition =
+                `center ${50 + scroll * 0.025}%`;
 
         }
 
     }
 );
+```
+
+}
+
 /* =========================================
-   CINEMATIC LOADING SYSTEM
+HERO SCROLL FADE
+========================================= */
+
+const heroContent =
+document.querySelector(".hero-content");
+
+const heroCard =
+document.querySelector(".hero-card");
+
+window.addEventListener(
+"scroll",
+() => {
+
+```
+    const scroll =
+        window.scrollY;
+
+
+    const fadeStart =
+        100;
+
+
+    const fadeEnd =
+        window.innerHeight * 0.8;
+
+
+    let opacity =
+        1 -
+        (
+            (scroll - fadeStart) /
+            (fadeEnd - fadeStart)
+        );
+
+
+    opacity =
+        Math.max(
+            0,
+            Math.min(
+                1,
+                opacity
+            )
+        );
+
+
+    if (heroContent) {
+
+        heroContent.style.opacity =
+            opacity;
+
+
+        heroContent.style.transform =
+            `translateY(${scroll * 0.12}px)`;
+
+    }
+
+
+    if (heroCard) {
+
+        heroCard.style.opacity =
+            opacity;
+
+
+        heroCard.style.transform =
+            `
+                rotate(2deg)
+                translateY(${scroll * 0.08}px)
+            `;
+
+    }
+
+}
+```
+
+);
+
+/* =========================================
+CINEMATIC LOADING SYSTEM
 ========================================= */
 
 const loadingScreen =
-    document.getElementById("loading-screen");
+document.getElementById(
+"loading-screen"
+);
 
 const loadingPercent =
-    document.querySelector(".loader-percent");
+document.querySelector(
+".loader-percent"
+);
 
 const loadingProgress =
-    document.querySelector(".loader-progress");
+document.querySelector(
+".loader-progress"
+);
 
 let loadingValue = 0;
 
 function runLoadingScreen() {
 
-    if (!loadingScreen) {
-        console.error("Loading screen not found.");
-        return;
-    }
+```
+if (!loadingScreen) {
 
-    const loadingInterval = setInterval(() => {
+    console.error(
+        "Loading screen not found."
+    );
 
-        loadingValue += Math.floor(Math.random() * 7) + 1;
+    return;
 
-        if (loadingValue >= 100) {
+}
 
-            loadingValue = 100;
 
-            clearInterval(loadingInterval);
+const loadingInterval =
+    setInterval(
+        () => {
 
-        }
+            loadingValue +=
+                Math.floor(
+                    Math.random() * 7
+                ) + 1;
 
-        if (loadingPercent) {
-            loadingPercent.textContent =
-                `${loadingValue}%`;
-        }
 
-        if (loadingProgress) {
-            loadingProgress.style.width =
-                `${loadingValue}%`;
-        }
+            if (
+                loadingValue >= 100
+            ) {
 
-        if (loadingValue === 100) {
+                loadingValue = 100;
 
-            setTimeout(() => {
+                clearInterval(
+                    loadingInterval
+                );
 
-                loadingScreen.classList.add("loaded");
+            }
 
-                setTimeout(() => {
-                    startFlyingBatarang();
-                }, 900);
 
-            }, 500);
+            if (loadingPercent) {
 
-        }
+                loadingPercent.textContent =
+                    `${loadingValue}%`;
 
-    }, 45);
+            }
+
+
+            if (loadingProgress) {
+
+                loadingProgress.style.width =
+                    `${loadingValue}%`;
+
+            }
+
+
+            if (
+                loadingValue === 100
+            ) {
+
+                setTimeout(
+                    () => {
+
+                        loadingScreen.classList.add(
+                            "loaded"
+                        );
+
+
+                        setTimeout(
+                            () => {
+
+                                startFlyingBatarang();
+
+                            },
+                            900
+                        );
+
+                    },
+                    500
+                );
+
+            }
+
+        },
+        45
+    );
+```
+
 }
 
 runLoadingScreen();
 
-
 /* =========================================
-   RANDOM FLYING BATARANG
+RANDOM FLYING BATARANG
 ========================================= */
 
 const flyingBatarang =
-    document.getElementById(
-        "flying-batarang"
-    );
+document.getElementById(
+"flying-batarang"
+);
 
+function randomNumber(
+min,
+max
+) {
 
-function randomNumber(min, max) {
-
-    return Math.random() *
-        (max - min) + min;
+```
+return Math.random() *
+    (max - min) + min;
+```
 
 }
 
-
 function startFlyingBatarang() {
 
-    if (!flyingBatarang) return;
+```
+if (!flyingBatarang) return;
 
 
-    function fly() {
+function fly() {
 
-        const screenWidth =
-            window.innerWidth;
-
-        const screenHeight =
-            window.innerHeight;
+    const screenWidth =
+        window.innerWidth;
 
 
-        const startX =
-            randomNumber(
-                -100,
-                screenWidth
-            );
-
-        const startY =
-            randomNumber(
-                80,
-                screenHeight - 80
-            );
+    const screenHeight =
+        window.innerHeight;
 
 
-        const endX =
-            randomNumber(
-                -100,
-                screenWidth + 100
-            );
-
-        const endY =
-            randomNumber(
-                80,
-                screenHeight - 80
-            );
+    const startX =
+        randomNumber(
+            -100,
+            screenWidth
+        );
 
 
-        const rotation =
-            randomNumber(
-                360,
-                1080
-            );
+    const startY =
+        randomNumber(
+            80,
+            screenHeight - 80
+        );
 
 
-        const duration =
-            randomNumber(
-                1800,
-                3200
-            );
+    const endX =
+        randomNumber(
+            -100,
+            screenWidth + 100
+        );
 
 
-        flyingBatarang.style.transition =
-            "none";
+    const endY =
+        randomNumber(
+            80,
+            screenHeight - 80
+        );
 
 
-        flyingBatarang.style.left =
-            `${startX}px`;
-
-        flyingBatarang.style.top =
-            `${startY}px`;
-
-        flyingBatarang.style.opacity =
-            "0";
+    const rotation =
+        randomNumber(
+            360,
+            1080
+        );
 
 
-        requestAnimationFrame(() => {
+    const duration =
+        randomNumber(
+            1800,
+            3200
+        );
+
+
+    flyingBatarang.style.transition =
+        "none";
+
+
+    flyingBatarang.style.left =
+        `${startX}px`;
+
+
+    flyingBatarang.style.top =
+        `${startY}px`;
+
+
+    flyingBatarang.style.opacity =
+        "0";
+
+
+    requestAnimationFrame(
+        () => {
 
             flyingBatarang.style.transition =
-                `left ${duration}ms cubic-bezier(.2,.7,.2,1),
-                 top ${duration}ms cubic-bezier(.2,.7,.2,1),
-                 transform ${duration}ms linear,
-                 opacity 350ms ease`;
+                `
+                    left ${duration}ms cubic-bezier(.2,.7,.2,1),
+                    top ${duration}ms cubic-bezier(.2,.7,.2,1),
+                    transform ${duration}ms linear,
+                    opacity 350ms ease
+                `;
 
 
             flyingBatarang.style.opacity =
@@ -959,39 +1255,51 @@ function startFlyingBatarang() {
             flyingBatarang.style.left =
                 `${endX}px`;
 
+
             flyingBatarang.style.top =
                 `${endY}px`;
 
-        });
+        }
+    );
 
 
-        setTimeout(() => {
+    setTimeout(
+        () => {
 
             flyingBatarang.style.opacity =
                 "0";
 
+        },
+        duration - 300
+    );
 
-        }, duration - 300);
 
-
-        setTimeout(() => {
+    setTimeout(
+        () => {
 
             fly();
 
-        }, duration + randomNumber(
+        },
+        duration +
+        randomNumber(
             2500,
             6500
-        ));
+        )
+    );
 
-    }
+}
 
 
-    /* First appearance */
+/* First appearance */
 
-    setTimeout(() => {
+setTimeout(
+    () => {
 
         fly();
 
-    }, 1800);
+    },
+    1800
+);
+```
 
 }
