@@ -1264,24 +1264,14 @@ function initializeLoadingScreen() {
             /* =========================================
                WHEN LOADING REACHES 100%
             ========================================= */
+          if (value === 100) {
 
-            if (value === 100) {
+               /*
+                * Stop at 100%.
+                * The user must press ENTER THE NIGHT.
+                */
 
-                setTimeout(() => {
-
-                    if (enterNight) {
-
-                        enterNight.classList.add(
-                            "visible"
-                        );
-
-                    }
-
-                }, 500);
-
-            }
-
-        }, 45);
+           screen.classList.add("ready");
 
 }
 
