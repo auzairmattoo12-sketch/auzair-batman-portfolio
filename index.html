@@ -21,52 +21,35 @@
 </head>
 
 <body>
- /* =========================================
-   LOADING SCREEN
-========================================= */
+ <div id="loading-screen">
 
-window.addEventListener("load", function () {
+    <div class="loader-content">
 
-    const screen = document.getElementById("loading-screen");
-    const percent = document.getElementById("loading-percent");
-    const progress = document.querySelector(".loader-progress");
+        <div class="loader-batarang">
+            <div class="wing wing-left"></div>
+            <div class="wing wing-right"></div>
+            <div class="center-core"></div>
+        </div>
 
-    if (!screen) {
-        console.error("Loading screen not found.");
-        return;
-    }
+        <div class="loader-title">
+            AUZAIR MATTOO
+        </div>
 
-    let value = 0;
+        <div class="loader-status">
+            INITIALIZING SYSTEM
+        </div>
 
-    const timer = setInterval(function () {
+        <div class="loader-line">
+            <div class="loader-progress"></div>
+        </div>
 
-        value += 2;
+        <div class="loader-percent">
+            0%
+        </div>
 
-        if (value >= 100) {
+    </div>
 
-            value = 100;
-
-            clearInterval(timer);
-
-            percent.textContent = value;
-            progress.style.width = value + "%";
-
-            setTimeout(function () {
-
-                screen.classList.add("loaded");
-
-            }, 400);
-
-            return;
-        }
-
-        percent.textContent = value;
-        progress.style.width = value + "%";
-
-    }, 35);
-
-});
-
+</div>
 
 
     <!-- =========================================
