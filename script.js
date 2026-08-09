@@ -703,3 +703,28 @@ if (heroArt) {
     );
 
 }
+
+/* =========================================
+   SCROLL PARALLAX
+========================================= */
+
+if (heroArt) {
+
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            const scroll =
+                window.scrollY;
+
+            if (scroll < window.innerHeight) {
+
+                heroArt.style.backgroundPosition =
+                    `center ${50 + scroll * 0.025}%`;
+
+            }
+
+        }
+    );
+
+}
