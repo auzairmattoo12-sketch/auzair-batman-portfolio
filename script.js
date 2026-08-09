@@ -598,7 +598,7 @@ renderAchievements();
 
 renderPosts();
 
-renderPosts();
+renderProjects();
 
 /* =========================================
    CONSOLE MESSAGE
