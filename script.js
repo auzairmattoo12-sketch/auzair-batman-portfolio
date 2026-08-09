@@ -657,10 +657,13 @@ function openPost(post) {
 
     function closeModal() {
 
-        modal.remove();
+        if (modal.parentNode) {
+            modal.parentNode.removeChild(modal);
+        }
 
-        document.body.style.overflow =
-            "";
+        document.body.style.overflow = "";
+
+        document.removeEventListener("keydown", escapeHandler);
 
     }
 
@@ -683,22 +686,15 @@ function openPost(post) {
     );
 
 
+    function escapeHandler(event) {
+        if (event.key === "Escape") {
+            closeModal();
+        }
+    }
+
     document.addEventListener(
         "keydown",
-        function escapeHandler(event) {
-
-            if (event.key === "Escape") {
-
-                closeModal();
-
-                document.removeEventListener(
-                    "keydown",
-                    escapeHandler
-                );
-
-            }
-
-        }
+        escapeHandler
     );
 
 }
@@ -784,15 +780,27 @@ function initializeMouseGlow() {
     }
 
 
+    // Throttle updates with requestAnimationFrame
+    let mouseX = 0;
+    let mouseY = 0;
+    let ticking = false;
+
     document.addEventListener(
         "mousemove",
         event => {
 
-            mouseGlow.style.left =
-                `${event.clientX}px`;
+            mouseX = event.clientX;
+            mouseY = event.clientY;
 
-            mouseGlow.style.top =
-                `${event.clientY}px`;
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    mouseGlow.style.left = `${mouseX}px`;
+                    mouseGlow.style.top = `${mouseY}px`;
+                    ticking = false;
+                });
+
+                ticking = true;
+            }
 
         }
     );
@@ -814,6 +822,10 @@ function initializeCardSpotlight() {
 
     cards.forEach(card => {
 
+        let lastX = 0;
+        let lastY = 0;
+        let raf = null;
+
         card.addEventListener(
             "mousemove",
             event => {
@@ -822,26 +834,18 @@ function initializeCardSpotlight() {
                     card.getBoundingClientRect();
 
 
-                const x =
-                    event.clientX -
-                    rect.left;
+                lastX = event.clientX - rect.left;
 
 
-                const y =
-                    event.clientY -
-                    rect.top;
+                lastY = event.clientY - rect.top;
 
+                if (raf) return;
 
-                card.style.setProperty(
-                    "--mouse-x",
-                    `${x}px`
-                );
-
-
-                card.style.setProperty(
-                    "--mouse-y",
-                    `${y}px`
-                );
+                raf = requestAnimationFrame(() => {
+                    card.style.setProperty("--mouse-x", `${lastX}px`);
+                    card.style.setProperty("--mouse-y", `${lastY}px`);
+                    raf = null;
+                });
 
             }
         );
@@ -865,50 +869,44 @@ function initializeBackgroundParallax() {
         return;
     }
 
+    // Throttle mousemove and scroll with requestAnimationFrame
+    let px = 0;
+    let py = 0;
+    let mouseRaf = null;
 
     document.addEventListener(
         "mousemove",
         event => {
 
-            const x =
-                event.clientX /
-                window.innerWidth -
-                0.5;
+            px = event.clientX / window.innerWidth - 0.5;
+            py = event.clientY / window.innerHeight - 0.5;
 
+            if (mouseRaf) return;
 
-            const y =
-                event.clientY /
-                window.innerHeight -
-                0.5;
-
-
-            heroArt.style.setProperty(
-                "--parallax-x",
-                `${x * -14}px`
-            );
-
-
-            heroArt.style.setProperty(
-                "--parallax-y",
-                `${y * -10}px`
-            );
+            mouseRaf = requestAnimationFrame(() => {
+                heroArt.style.setProperty("--parallax-x", `${px * -14}px`);
+                heroArt.style.setProperty("--parallax-y", `${py * -10}px`);
+                mouseRaf = null;
+            });
 
         }
     );
 
 
+    let scrollRaf = null;
+
     window.addEventListener(
         "scroll",
         () => {
 
-            if (window.scrollY <
-                window.innerHeight) {
+            if (window.scrollY < window.innerHeight) {
 
-                heroArt.style.backgroundPosition =
-                    `center ${
-                        50 +
-                        window.scrollY * 0.025
-                    }%`;
+                if (scrollRaf) return;
+
+                scrollRaf = requestAnimationFrame(() => {
+                    heroArt.style.backgroundPosition = `center ${50 + window.scrollY * 0.025}%`;
+                    scrollRaf = null;
+                });
 
             }
 
@@ -1036,10 +1034,19 @@ function initializeMusicSystem() {
 
 
     /* -------------------------------------------------
+       helper: clamp
+    ------------------------------------------------- */
+    function clamp01(v) {
+        const n = Number(v);
+        if (Number.isNaN(n)) return 0;
+        return Math.max(0, Math.min(1, n));
+    }
+
+    /* -------------------------------------------------
        DEFAULT VOLUME
     ------------------------------------------------- */
 
-    music.volume = Number(musicVolume.value);
+    music.volume = clamp01(Number(musicVolume.value));
 
 
     /* -------------------------------------------------
@@ -1067,7 +1074,7 @@ function initializeMusicSystem() {
             /* Smooth fade-in */
 
             const targetVolume =
-                Number(musicVolume.value);
+                clamp01(Number(musicVolume.value));
 
             let volume = 0;
 
@@ -1078,7 +1085,7 @@ function initializeMusicSystem() {
 
                     music.volume =
                         Math.min(
-                            volume,
+                            Math.max(0, volume),
                             targetVolume
                         );
 
@@ -1182,8 +1189,7 @@ function initializeMusicSystem() {
 
     musicVolume.addEventListener("input", () => {
 
-        music.volume =
-            Number(musicVolume.value);
+        music.volume = clamp01(Number(musicVolume.value));
 
     });
 
@@ -1253,8 +1259,8 @@ function initializeLoadingScreen() {
             }
 
 
-            percent.textContent =
-                value;
+            // show percent with percent sign
+            percent.textContent = `${value}%`;
 
 
             progress.style.width =
@@ -1280,8 +1286,7 @@ function initializeLoadingScreen() {
             ----------------------------------------- */
 
             if (
-                value === 100 &&
-                finished
+                value === 100
             ) {
 
                 setTimeout(() => {
@@ -1467,3 +1472,4 @@ function startFlyingBatarang() {
     fly();
 
 }
+
