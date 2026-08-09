@@ -156,7 +156,7 @@ const projects = [
 
 /* =====================================================
    START EVERYTHING AFTER HTML LOADS
-==================================================== */
+===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* =====================================================
    MOBILE NAVIGATION
-==================================================== */
+===================================================== */
 
 function initializeNavigation() {
 
@@ -233,7 +233,7 @@ function initializeNavigation() {
 
 /* =====================================================
    ACHIEVEMENTS
-==================================================== */
+===================================================== */
 
 function renderAchievements() {
 
@@ -304,7 +304,7 @@ function renderAchievements() {
 
 /* =====================================================
    PROJECTS
-==================================================== */
+===================================================== */
 
 function renderProjects() {
 
@@ -462,7 +462,7 @@ function renderProjects() {
 
 /* =====================================================
    POSTS
-==================================================== */
+===================================================== */
 
 function renderPosts() {
 
@@ -540,7 +540,7 @@ function renderPosts() {
 
 /* =====================================================
    POST READER
-==================================================== */
+===================================================== */
 
 function initializePostReader() {
 
@@ -586,7 +586,7 @@ function initializePostReader() {
 
 /* =====================================================
    OPEN POST
-==================================================== */
+===================================================== */
 
 function openPost(post) {
 
@@ -702,7 +702,7 @@ function openPost(post) {
 
 /* =====================================================
    SCROLL REVEAL
-==================================================== */
+===================================================== */
 
 function initializeScrollReveal() {
 
@@ -767,7 +767,7 @@ function initializeScrollReveal() {
 
 /* =====================================================
    MOUSE GLOW
-==================================================== */
+===================================================== */
 
 function initializeMouseGlow() {
 
@@ -810,7 +810,7 @@ function initializeMouseGlow() {
 
 /* =====================================================
    CARD SPOTLIGHT
-==================================================== */
+===================================================== */
 
 function initializeCardSpotlight() {
 
@@ -857,7 +857,7 @@ function initializeCardSpotlight() {
 
 /* =====================================================
    BACKGROUND PARALLAX
-==================================================== */
+===================================================== */
 
 function initializeBackgroundParallax() {
 
@@ -918,7 +918,7 @@ function initializeBackgroundParallax() {
 
 /* =====================================================
    HERO FADE
-==================================================== */
+===================================================== */
 
 function initializeHeroFade() {
 
@@ -996,7 +996,7 @@ function initializeHeroFade() {
 }
 /* =====================================================
    CINEMATIC MUSIC SYSTEM
-==================================================== */
+===================================================== */
 
 function initializeMusicSystem() {
 
@@ -1203,157 +1203,125 @@ function initializeMusicSystem() {
 
 function initializeLoadingScreen() {
 
-    try {
-        const screen =
-            document.getElementById(
-                "loading-screen"
-            );
+    const screen =
+        document.getElementById(
+            "loading-screen"
+        );
 
-        const percent =
-            document.getElementById(
-                "loading-percent"
-            );
+    const percent =
+        document.getElementById(
+            "loading-percent"
+        );
 
-        const progress =
-            document.querySelector(
-                ".loader-progress"
-            );
+    const progress =
+        document.querySelector(
+            ".loader-progress"
+        );
 
-        const enterNight =
-            document.getElementById(
-                "enter-night"
-            );
-
-
-        if (!screen) {
-            return;
-        }
+    const enterNight =
+        document.getElementById(
+            "enter-night"
+        );
 
 
-        if (!percent || !progress) {
-
-            // If the expected loader elements are missing, ensure site still proceeds
-            // Reveal the enter button but do not auto-close the loader; preserve visuals
-            screen.classList.add("ready");
-            if (enterNight) enterNight.classList.add("visible");
-            return;
-
-        }
-
-
-        let value = 0;
-
-
-        const interval =
-            setInterval(() => {
-
-                value +=
-                    Math.floor(
-                        Math.random() * 8
-                    ) + 2;
-
-
-                if (value >= 100) {
-
-                    value = 100;
-
-                    clearInterval(interval);
-
-                }
-
-
-                // show percent with percent sign
-                percent.textContent = `${value}%`;
-
-
-                progress.style.width =
-                    `${value}%`;
-
-
-                /* =========================================
-                   WHEN LOADING REACHES 100%
-                ========================================= */
-                if (value === 100) {
-
-                    /*
-                     * Stop at 100%.
-                     * The user must press ENTER THE NIGHT.
-                     */
-
-                    screen.classList.add("ready");
-
-                }
-
-                /* -----------------------------------------
-                   SHOW ENTER BUTTON
-                ----------------------------------------- */
-
-                if (
-                    value === 100
-                ) {
-
-                    setTimeout(() => {
-
-                        if (enterNight) {
-
-                            enterNight.classList.add(
-                                "visible"
-                            );
-
-                        } else {
-
-                            /*
-                             Fallback:
-                             If the button doesn't exist,
-                             don't leave the visitor stuck.
-                            */
-
-                            screen.classList.add(
-                                "loaded"
-                            );
-
-                            setTimeout(() => {
-
-                                startFlyingBatarang();
-
-                            }, 800);
-
-                        }
-
-                    }, 500);
-
-                }
-
-            }, 45);
-
-        // safety fallback: if something blocks the loader, reveal the enter button after 7s
-        const safety = setTimeout(() => {
-            try {
-                if (enterNight && !enterNight.classList.contains('visible')) {
-                    enterNight.classList.add('visible');
-                }
-                if (screen && !screen.classList.contains('ready')) {
-                    screen.classList.add('ready');
-                }
-                // do not auto-close the loading screen; let the user click ENTER THE NIGHT
-                clearInterval(interval);
-            } catch (e) {
-                console.error('Loader safety fallback failed:', e);
-            }
-        }, 7000);
-
-    } catch (err) {
-        console.error('initializeLoadingScreen error:', err);
-        // ensure the site becomes usable even if the loader fails — reveal button only
-        try {
-            const screen = document.getElementById('loading-screen');
-            const enterNight = document.getElementById('enter-night');
-            if (screen) screen.classList.add('ready');
-            if (enterNight) enterNight.classList.add('visible');
-        } catch (e) {
-            console.error('Loader recovery failed:', e);
-        }
+    if (!screen) {
+        return;
     }
+
+
+    if (!percent || !progress) {
+
+        screen.classList.add("loaded");
+
+        return;
+
+    }
+
+
+    let value = 0;
+
+
+    const interval =
+        setInterval(() => {
+
+            value +=
+                Math.floor(
+                    Math.random() * 8
+                ) + 2;
+
+
+            if (value >= 100) {
+
+                value = 100;
+
+                clearInterval(interval);
+
+            }
+
+
+            // show percent with percent sign
+            percent.textContent = `${value}%`;
+
+
+            progress.style.width =
+                `${value}%`;
+
+
+            /* =========================================
+               WHEN LOADING REACHES 100%
+            ========================================= */
+          if (value === 100) {
+
+               /*
+                * Stop at 100%.
+                * The user must press ENTER THE NIGHT.
+                */
+
+           screen.classList.add("ready");
+
+}
+
+            /* -----------------------------------------
+               SHOW ENTER BUTTON
+            ----------------------------------------- */
+
+            if (
+                value === 100
+            ) {
+
+                setTimeout(() => {
+
+                    if (enterNight) {
+
+                        enterNight.classList.add(
+                            "visible"
+                        );
+
+                    } else {
+
+                        /*
+                         Fallback:
+                         If the button doesn't exist,
+                         don't leave the visitor stuck.
+                        */
+
+                        screen.classList.add(
+                            "loaded"
+                        );
+
+                        setTimeout(() => {
+
+                            startFlyingBatarang();
+
+                        }, 800);
+
+                    }
+
+                }, 500);
+
+            }
+
+        }, 45);
 
 }
 
