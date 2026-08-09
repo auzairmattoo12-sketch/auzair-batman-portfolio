@@ -797,79 +797,62 @@ const loadingScreen =
     document.getElementById("loading-screen");
 
 const loadingPercent =
-    document.getElementById("loading-percent");
+    document.querySelector(".loader-percent");
 
 const loadingProgress =
     document.querySelector(".loader-progress");
 
-
 let loadingValue = 0;
-
 
 function runLoadingScreen() {
 
-    const loadingInterval =
-        setInterval(() => {
+    if (!loadingScreen) {
+        console.error("Loading screen not found.");
+        return;
+    }
 
-            loadingValue +=
-                Math.floor(
-                    Math.random() * 7
-                ) + 1;
+    const loadingInterval = setInterval(() => {
 
+        loadingValue += Math.floor(Math.random() * 7) + 1;
 
-            if (loadingValue >= 100) {
+        if (loadingValue >= 100) {
 
-                loadingValue = 100;
+            loadingValue = 100;
 
-                clearInterval(
-                    loadingInterval
-                );
+            clearInterval(loadingInterval);
 
+        }
 
-                loadingPercent.textContent =
-                    loadingValue;
-
-                loadingProgress.style.width =
-                    `${loadingValue}%`;
-
-
-                setTimeout(() => {
-
-                    loadingScreen.classList.add(
-                        "loaded"
-                    );
-
-                    setTimeout(() => {
-
-                        startFlyingBatarang();
-
-                    }, 900);
-
-                }, 400);
-
-
-                return;
-
-            }
-
-
+        if (loadingPercent) {
             loadingPercent.textContent =
-                loadingValue;
+                `${loadingValue}%`;
+        }
 
+        if (loadingProgress) {
             loadingProgress.style.width =
                 `${loadingValue}%`;
+        }
 
+        if (loadingValue === 100) {
 
-        }, 45);
+            setTimeout(() => {
 
+                loadingScreen.classList.add("loaded");
+
+                setTimeout(() => {
+                    startFlyingBatarang();
+                }, 900);
+
+            }, 500);
+
+        }
+
+    }, 45);
 }
 
+runLoadingScreen();
 
-if (loadingScreen) {
 
-    runLoadingScreen();
-
-}
 /* =========================================
    RANDOM FLYING BATARANG
 ========================================= */
