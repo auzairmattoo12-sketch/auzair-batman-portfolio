@@ -870,3 +870,145 @@ if (loadingScreen) {
     runLoadingScreen();
 
 }
+/* =========================================
+   RANDOM FLYING BATARANG
+========================================= */
+
+const flyingBatarang =
+    document.getElementById(
+        "flying-batarang"
+    );
+
+
+function randomNumber(min, max) {
+
+    return Math.random() *
+        (max - min) + min;
+
+}
+
+
+function startFlyingBatarang() {
+
+    if (!flyingBatarang) return;
+
+
+    function fly() {
+
+        const screenWidth =
+            window.innerWidth;
+
+        const screenHeight =
+            window.innerHeight;
+
+
+        const startX =
+            randomNumber(
+                -100,
+                screenWidth
+            );
+
+        const startY =
+            randomNumber(
+                80,
+                screenHeight - 80
+            );
+
+
+        const endX =
+            randomNumber(
+                -100,
+                screenWidth + 100
+            );
+
+        const endY =
+            randomNumber(
+                80,
+                screenHeight - 80
+            );
+
+
+        const rotation =
+            randomNumber(
+                360,
+                1080
+            );
+
+
+        const duration =
+            randomNumber(
+                1800,
+                3200
+            );
+
+
+        flyingBatarang.style.transition =
+            "none";
+
+
+        flyingBatarang.style.left =
+            `${startX}px`;
+
+        flyingBatarang.style.top =
+            `${startY}px`;
+
+        flyingBatarang.style.opacity =
+            "0";
+
+
+        requestAnimationFrame(() => {
+
+            flyingBatarang.style.transition =
+                `left ${duration}ms cubic-bezier(.2,.7,.2,1),
+                 top ${duration}ms cubic-bezier(.2,.7,.2,1),
+                 transform ${duration}ms linear,
+                 opacity 350ms ease`;
+
+
+            flyingBatarang.style.opacity =
+                "0.75";
+
+
+            flyingBatarang.style.transform =
+                `rotate(${rotation}deg)`;
+
+
+            flyingBatarang.style.left =
+                `${endX}px`;
+
+            flyingBatarang.style.top =
+                `${endY}px`;
+
+        });
+
+
+        setTimeout(() => {
+
+            flyingBatarang.style.opacity =
+                "0";
+
+
+        }, duration - 300);
+
+
+        setTimeout(() => {
+
+            fly();
+
+        }, duration + randomNumber(
+            2500,
+            6500
+        ));
+
+    }
+
+
+    /* First appearance */
+
+    setTimeout(() => {
+
+        fly();
+
+    }, 1800);
+
+}
