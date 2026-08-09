@@ -607,3 +607,58 @@ renderPosts();
 console.log(
     "🦇 Auzair Mattoo Portfolio System Online."
 );
+/* =========================================
+   CINEMATIC MOUSE EFFECT
+========================================= */
+
+const mouseGlow =
+    document.querySelector(".mouse-glow");
+
+document.addEventListener("mousemove", event => {
+
+    if (!mouseGlow) return;
+
+    mouseGlow.style.left =
+        `${event.clientX}px`;
+
+    mouseGlow.style.top =
+        `${event.clientY}px`;
+
+});
+
+
+/* =========================================
+   CARD MOUSE SPOTLIGHT
+========================================= */
+
+const interactiveCards =
+    document.querySelectorAll(
+        ".skill-card, .project-card, .post-card"
+    );
+
+interactiveCards.forEach(card => {
+
+    card.addEventListener("mousemove", event => {
+
+        const rect =
+            card.getBoundingClientRect();
+
+        const x =
+            event.clientX - rect.left;
+
+        const y =
+            event.clientY - rect.top;
+
+        card.style.setProperty(
+            "--mouse-x",
+            `${x}px`
+        );
+
+        card.style.setProperty(
+            "--mouse-y",
+            `${y}px`
+        );
+
+    });
+
+});
