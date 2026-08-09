@@ -473,16 +473,14 @@ a {
 
     padding: 35px;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,0.055),
-            rgba(255,255,255,0.015)
-        );
+  background:
+    linear-gradient(
+        145deg,
+        rgba(8,8,8,0.82),
+        rgba(8,8,8,0.48)
+    );
 
-    border: 1px solid rgba(255,255,255,0.08);
-
-    backdrop-filter: blur(20px);
+backdrop-filter: blur(8px);
 
     box-shadow:
         0 30px 80px rgba(0,0,0,0.45);
