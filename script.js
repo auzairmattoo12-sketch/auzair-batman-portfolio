@@ -728,3 +728,64 @@ if (heroArt) {
     );
 
 }
+
+/* =========================================
+   HERO SCROLL FADE
+========================================= */
+
+const heroContent =
+    document.querySelector(".hero-content");
+
+const heroCard =
+    document.querySelector(".hero-card");
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        const scroll =
+            window.scrollY;
+
+        const fadeStart = 100;
+
+        const fadeEnd =
+            window.innerHeight * 0.8;
+
+        let opacity =
+            1 -
+            (
+                (scroll - fadeStart) /
+                (fadeEnd - fadeStart)
+            );
+
+        opacity =
+            Math.max(
+                0,
+                Math.min(1, opacity)
+            );
+
+        if (heroContent) {
+
+            heroContent.style.opacity =
+                opacity;
+
+            heroContent.style.transform =
+                `translateY(${scroll * 0.12}px)`;
+
+        }
+
+        if (heroCard) {
+
+            heroCard.style.opacity =
+                opacity;
+
+            heroCard.style.transform =
+                `
+                rotate(2deg)
+                translateY(${scroll * 0.08}px)
+                `;
+
+        }
+
+    }
+);
