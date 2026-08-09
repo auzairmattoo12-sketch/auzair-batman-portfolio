@@ -2484,3 +2484,8 @@ footer {
     }
 
 }
+.grid,
+.background-fog,
+.background-vignette {
+    display: none;
+}
