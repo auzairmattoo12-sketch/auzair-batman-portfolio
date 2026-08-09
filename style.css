@@ -31,59 +31,134 @@ a {
 
 
 /* =========================================
-   BACKGROUND
+   CINEMATIC BACKGROUND
 ========================================= */
 
 .background {
     position: fixed;
+
     inset: 0;
+
     z-index: -10;
+
     overflow: hidden;
-    background:
-        radial-gradient(
-            circle at 50% 15%,
-            rgba(245, 197, 66, 0.08),
-            transparent 30%
-        ),
-        #050505;
+
+    background: #030303;
+
+    pointer-events: none;
 }
 
-.moon {
+
+/* =========================================
+   GENERATED GOTHAM ARTWORK
+========================================= */
+
+.hero-art {
+
     position: absolute;
 
-    width: 420px;
-    height: 420px;
+    inset: -3%;
 
-    border-radius: 50%;
+    background-image:
+        url("assets/hero-background.png");
 
-    top: -170px;
-    right: -100px;
+    background-size: cover;
 
-    background: rgba(255, 255, 255, 0.025);
+    background-position: center center;
 
-    box-shadow:
-        0 0 100px rgba(255, 255, 255, 0.04);
-}
+    background-repeat: no-repeat;
 
-.bat-signal {
-    position: absolute;
-
-    width: 500px;
-    height: 500px;
-
-    left: 50%;
-    top: 25%;
-
-    transform: translate(-50%, -50%);
-
-    background:
-        radial-gradient(
-            ellipse,
-            rgba(245, 197, 66, 0.04),
-            transparent 65%
+    transform:
+        scale(1.04)
+        translate3d(
+            var(--parallax-x, 0px),
+            var(--parallax-y, 0px),
+            0
         );
 
-    filter: blur(10px);
+    transition:
+        transform 0.25s ease-out;
+
+    will-change: transform;
+
+}
+
+
+/* =========================================
+   READABILITY OVERLAY
+========================================= */
+
+.background-vignette {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,0.96) 0%,
+            rgba(0,0,0,0.78) 30%,
+            rgba(0,0,0,0.25) 65%,
+            rgba(0,0,0,0.68) 100%
+        ),
+
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,0.30),
+            rgba(0,0,0,0.10) 40%,
+            #030303 100%
+        );
+
+}
+
+
+/* =========================================
+   ATMOSPHERIC FOG
+========================================= */
+
+.background-fog {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            ellipse at 65% 55%,
+            rgba(245,197,66,0.045),
+            transparent 35%
+        );
+
+    filter: blur(30px);
+
+    opacity: 0.8;
+
+    animation:
+        fogDrift 12s ease-in-out infinite alternate;
+
+}
+
+
+@keyframes fogDrift {
+
+    0% {
+
+        transform:
+            translate3d(-1%, 0, 0)
+            scale(1);
+
+    }
+
+    100% {
+
+        transform:
+            translate3d(2%, -1%, 0)
+            scale(1.05);
+
+    }
+
 }
 
 .grid {
