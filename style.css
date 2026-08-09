@@ -2047,3 +2047,17 @@ footer {
     z-index: 2;
 
 }
+/* =========================================
+   CINEMATIC SECTION ENTRY
+========================================= */
+
+.section {
+    position: relative;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(5, 5, 5, 0.94),
+            #050505
+        );
+}
