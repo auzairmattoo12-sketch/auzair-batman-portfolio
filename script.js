@@ -1369,29 +1369,32 @@ function initializeMusicSystem() {
 function initializeLoadingScreen() {
 
     const screen =
-        document.getElementById("loading-screen");
+        document.getElementById(
+            "loading-screen"
+        );
 
     const percent =
-        document.getElementById("loading-percent");
+        document.getElementById(
+            "loading-percent"
+        );
 
     const progress =
-        document.querySelector(".loader-progress");
+        document.querySelector(
+            ".loader-progress"
+        );
 
     const enterNight =
-        document.getElementById("enter-night");
+        document.getElementById(
+            "enter-night"
+        );
 
 
     if (!screen) {
-        console.error("Loading screen not found.");
         return;
     }
 
 
     if (!percent || !progress) {
-
-        console.error(
-            "Loading screen elements are missing."
-        );
 
         screen.classList.add("loaded");
 
@@ -1401,8 +1404,6 @@ function initializeLoadingScreen() {
 
 
     let value = 0;
-
-    let finished = false;
 
 
     const interval =
@@ -1420,8 +1421,6 @@ function initializeLoadingScreen() {
 
                 clearInterval(interval);
 
-                finished = true;
-
             }
 
 
@@ -1432,6 +1431,30 @@ function initializeLoadingScreen() {
             progress.style.width =
                 `${value}%`;
 
+
+            /* =========================================
+               WHEN LOADING REACHES 100%
+            ========================================= */
+
+            if (value === 100) {
+
+                setTimeout(() => {
+
+                    if (enterNight) {
+
+                        enterNight.classList.add(
+                            "visible"
+                        );
+
+                    }
+
+                }, 500);
+
+            }
+
+        }, 45);
+
+}
 
             /* -----------------------------------------
                SHOW ENTER BUTTON
