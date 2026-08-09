@@ -100,7 +100,81 @@ const posts = [
     }
 
 ];
+/* =========================================
+   EDIT PROJECTS HERE
+========================================= */
 
+const projects = [
+
+    {
+        title: "Personal Portfolio",
+
+        category: "WEB DEVELOPMENT",
+
+        description:
+            "A Batman-inspired personal portfolio built from scratch using HTML, CSS and JavaScript.",
+
+        image: "",
+
+        technologies: [
+            "HTML",
+            "CSS",
+            "JAVASCRIPT"
+        ],
+
+        github: "#",
+
+        live: "#",
+
+        featured: true
+    },
+
+
+    {
+        title: "AI Project",
+
+        category: "ARTIFICIAL INTELLIGENCE",
+
+        description:
+            "My upcoming artificial intelligence project. Details will be added after development begins.",
+
+        image: "",
+
+        technologies: [
+            "PYTHON",
+            "AI"
+        ],
+
+        github: "#",
+
+        live: "#",
+
+        featured: false
+    },
+
+
+    {
+        title: "Future Project",
+
+        category: "EXPERIMENT",
+
+        description:
+            "A future project that will be added to the portfolio.",
+
+        image: "",
+
+        technologies: [
+            "COMING SOON"
+        ],
+
+        github: "#",
+
+        live: "#",
+
+        featured: false
+    }
+
+];
 
 /* =========================================
    MOBILE MENU
@@ -248,7 +322,128 @@ function renderPosts() {
         postsGrid.appendChild(article);
 
     });
+/* =========================================
+   RENDER PROJECTS
+========================================= */
 
+function renderProjects() {
+
+    const projectsGrid =
+        document.querySelector(".projects-grid");
+
+    if (!projectsGrid) return;
+
+    projectsGrid.innerHTML = "";
+
+    projects.forEach(project => {
+
+        const article =
+            document.createElement("article");
+
+        article.className =
+            project.featured
+                ? "project-card featured"
+                : "project-card";
+
+        const imageHTML = project.image
+            ? `
+                <div class="project-image has-image">
+
+                    <img
+                        src="${project.image}"
+                        alt="${project.title}"
+                    >
+
+                </div>
+            `
+            : `
+                <div class="project-image">
+
+                    <span>
+                        ${project.title}
+                    </span>
+
+                </div>
+            `;
+
+
+        const technologiesHTML =
+            project.technologies
+                .map(technology =>
+                    `<span>${technology}</span>`
+                )
+                .join("");
+
+
+        article.innerHTML = `
+
+            ${imageHTML}
+
+            <div class="project-content">
+
+                <p class="project-type">
+                    ${project.category}
+                </p>
+
+                <h3>
+                    ${project.title}
+                </h3>
+
+                <p>
+                    ${project.description}
+                </p>
+
+                <div class="project-tags">
+
+                    ${technologiesHTML}
+
+                </div>
+
+                <div class="project-buttons">
+
+                    ${
+                        project.github !== "#"
+                        ?
+                        `
+                        <a
+                            href="${project.github}"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            GITHUB →
+                        </a>
+                        `
+                        :
+                        ""
+                    }
+
+                    ${
+                        project.live !== "#"
+                        ?
+                        `
+                        <a
+                            href="${project.live}"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            LIVE DEMO →
+                        </a>
+                        `
+                        :
+                        ""
+                    }
+
+                </div>
+
+            </div>
+
+        `;
+
+        projectsGrid.appendChild(article);
+
+    });
+
+}
 
     /* READ MORE BUTTONS */
 
