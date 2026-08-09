@@ -1999,3 +1999,53 @@ footer {
     }
 
 }
+/* =========================================
+   CINEMATIC HERO
+========================================= */
+
+.hero {
+
+    position: relative;
+
+    min-height: 100vh;
+
+}
+
+
+/* Fade hero into next section */
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    bottom: -1px;
+
+    height: 220px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            #050505
+        );
+
+    pointer-events: none;
+
+}
+
+
+/* Keep hero content above artwork */
+
+.hero-content,
+.hero-card {
+
+    position: relative;
+
+    z-index: 2;
+
+}
