@@ -1197,31 +1197,21 @@ function initializeMusicSystem() {
 function initializeLoadingScreen() {
 
     const screen =
-        document.getElementById(
-            "loading-screen"
-        );
-
+        document.getElementById("loading-screen");
 
     const percent =
-        document.getElementById(
-            "loading-percent"
-        );
-
+        document.getElementById("loading-percent");
 
     const progress =
-        document.querySelector(
-            ".loader-progress"
-        );
+        document.querySelector(".loader-progress");
+
+    const enterNight =
+        document.getElementById("enter-night");
 
 
     if (!screen) {
-
-        console.error(
-            "Loading screen element not found."
-        );
-
+        console.error("Loading screen not found.");
         return;
-
     }
 
 
@@ -1240,6 +1230,8 @@ function initializeLoadingScreen() {
 
     let value = 0;
 
+    let finished = false;
+
 
     const interval =
         setInterval(() => {
@@ -1256,6 +1248,8 @@ function initializeLoadingScreen() {
 
                 clearInterval(interval);
 
+                finished = true;
+
             }
 
 
@@ -1266,27 +1260,51 @@ function initializeLoadingScreen() {
             progress.style.width =
                 `${value}%`;
 
-if (value === 100) {
 
-    setTimeout(() => {
+            /* -----------------------------------------
+               SHOW ENTER BUTTON
+            ----------------------------------------- */
 
-        const enterNight =
-            document.getElementById(
-                "enter-night"
-            );
+            if (
+                value === 100 &&
+                finished
+            ) {
 
-        if (enterNight) {
+                setTimeout(() => {
 
-            enterNight.classList.add(
-                "visible"
-            );
+                    if (enterNight) {
 
-        }
+                        enterNight.classList.add(
+                            "visible"
+                        );
 
-    }, 500);
+                    } else {
+
+                        /*
+                         Fallback:
+                         If the button doesn't exist,
+                         don't leave the visitor stuck.
+                        */
+
+                        screen.classList.add(
+                            "loaded"
+                        );
+
+                        setTimeout(() => {
+
+                            startFlyingBatarang();
+
+                        }, 800);
+
+                    }
+
+                }, 500);
+
+            }
+
+        }, 45);
 
 }
-
 
 /* =====================================================
    RANDOM FLYING BATARANG
