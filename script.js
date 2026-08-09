@@ -1,163 +1,183 @@
-```javascript
-/* =========================================
+/* =====================================================
    AUZAIR MATTOO PORTFOLIO
    MAIN JAVASCRIPT
-========================================= */
+===================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
 
 
-/* =========================================
-   CONTENT
-========================================= */
-
-const achievements = [
-
-    {
-        year: "2026",
-        title: "B.Tech Journey Begins",
-        description:
-            "Started my engineering journey with a focus on Artificial Intelligence.",
-        image: ""
-    },
-
-    {
-        year: "2026",
-        title: "Portfolio System",
-        description:
-            "Designed and developed my personal developer portfolio from scratch.",
-        image: ""
-    },
-
-    {
-        year: "COMING SOON",
-        title: "First Major AI Project",
-        description:
-            "A new AI project will be added here when completed.",
-        image: ""
-    }
-
-];
+    /* =================================================
+       CONTENT
+    ================================================= */
 
 
-const posts = [
+    const achievements = [
 
-    {
-        date: "AUG 2026",
-        category: "JOURNEY",
-        title: "Why I Built This Portfolio",
+        {
+            year: "2026",
+            title: "B.Tech Journey Begins",
+            description:
+                "Started my engineering journey with a focus on Artificial Intelligence.",
+            image: ""
+        },
 
-        excerpt:
-            "A look at why I decided to create my own digital headquarters and document my journey into technology and AI.",
+        {
+            year: "2026",
+            title: "Portfolio System",
+            description:
+                "Designed and developed my personal developer portfolio from scratch.",
+            image: ""
+        },
 
-        content:
-            "This portfolio is more than just a website. It is a place where I can document projects, achievements, experiments, ideas and everything I build throughout my engineering journey.",
+        {
+            year: "COMING SOON",
+            title: "First Major AI Project",
+            description:
+                "A new AI project will be added here when completed.",
+            image: ""
+        }
 
-        image: "",
-        link: "#"
-    },
-
-    {
-        date: "COMING SOON",
-        category: "AI / MACHINE LEARNING",
-        title: "My First AI Project",
-
-        excerpt:
-            "Documenting the process of building my first major artificial intelligence project.",
-
-        content:
-            "This post will be updated when the project is completed.",
-
-        image: "",
-        link: "#"
-    },
-
-    {
-        date: "COMING SOON",
-        category: "DEVELOPMENT",
-        title: "What I'm Learning",
-
-        excerpt:
-            "A collection of technologies, programming concepts and tools I'm currently exploring.",
-
-        content:
-            "This section will contain updates about the technologies and concepts I'm learning.",
-
-        image: "",
-        link: "#"
-    }
-
-];
+    ];
 
 
-const projects = [
+    const posts = [
 
-    {
-        title: "Personal Portfolio",
-        category: "WEB DEVELOPMENT",
+        {
+            date: "AUG 2026",
 
-        description:
-            "A Batman-inspired personal portfolio built from scratch using HTML, CSS and JavaScript.",
+            category: "JOURNEY",
 
-        image: "",
+            title: "Why I Built This Portfolio",
 
-        technologies: [
-            "HTML",
-            "CSS",
-            "JAVASCRIPT"
-        ],
+            excerpt:
+                "A look at why I decided to create my own digital headquarters and document my journey into technology and AI.",
 
-        github: "#",
-        live: "#",
+            content:
+                "This portfolio is more than just a website. It is a place where I can document projects, achievements, experiments, ideas and everything I build throughout my engineering journey.",
 
-        featured: true
-    },
+            image: "",
 
-    {
-        title: "AI Project",
-        category: "ARTIFICIAL INTELLIGENCE",
-
-        description:
-            "My upcoming artificial intelligence project. Details will be added after development begins.",
-
-        image: "",
-
-        technologies: [
-            "PYTHON",
-            "AI"
-        ],
-
-        github: "#",
-        live: "#",
-
-        featured: false
-    },
-
-    {
-        title: "Future Project",
-        category: "EXPERIMENT",
-
-        description:
-            "A future project that will be added to the portfolio.",
-
-        image: "",
-
-        technologies: [
-            "COMING SOON"
-        ],
-
-        github: "#",
-        live: "#",
-
-        featured: false
-    }
-
-];
+            link: "#"
+        },
 
 
-/* =========================================
-   MOBILE MENU
-========================================= */
+        {
+            date: "COMING SOON",
 
-function setupMobileMenu() {
+            category: "AI / MACHINE LEARNING",
+
+            title: "My First AI Project",
+
+            excerpt:
+                "Documenting the process of building my first major artificial intelligence project.",
+
+            content:
+                "This post will be updated when the project is completed.",
+
+            image: "",
+
+            link: "#"
+        },
+
+
+        {
+            date: "COMING SOON",
+
+            category: "DEVELOPMENT",
+
+            title: "What I'm Learning",
+
+            excerpt:
+                "A collection of technologies, programming concepts and tools I'm currently exploring.",
+
+            content:
+                "This section will contain updates about the technologies and concepts I'm learning.",
+
+            image: "",
+
+            link: "#"
+        }
+
+    ];
+
+
+    const projects = [
+
+        {
+            title: "Personal Portfolio",
+
+            category: "WEB DEVELOPMENT",
+
+            description:
+                "A Batman-inspired personal portfolio built from scratch using HTML, CSS and JavaScript.",
+
+            image: "",
+
+            technologies: [
+                "HTML",
+                "CSS",
+                "JAVASCRIPT"
+            ],
+
+            github: "#",
+
+            live: "#",
+
+            featured: true
+        },
+
+
+        {
+            title: "AI Project",
+
+            category: "ARTIFICIAL INTELLIGENCE",
+
+            description:
+                "My upcoming artificial intelligence project. Details will be added after development begins.",
+
+            image: "",
+
+            technologies: [
+                "PYTHON",
+                "AI"
+            ],
+
+            github: "#",
+
+            live: "#",
+
+            featured: false
+        },
+
+
+        {
+            title: "Future Project",
+
+            category: "EXPERIMENT",
+
+            description:
+                "A future project that will be added to the portfolio.",
+
+            image: "",
+
+            technologies: [
+                "COMING SOON"
+            ],
+
+            github: "#",
+
+            live: "#",
+
+            featured: false
+        }
+
+    ];
+
+
+
+    /* =================================================
+       MOBILE MENU
+    ================================================= */
 
     const menuButton =
         document.getElementById("menuButton");
@@ -165,59 +185,61 @@ function setupMobileMenu() {
     const navLinks =
         document.querySelector(".nav-links");
 
-    if (!menuButton || !navLinks) return;
+
+    if (menuButton && navLinks) {
+
+        menuButton.addEventListener(
+            "click",
+            () => {
+
+                navLinks.classList.toggle("active");
+
+            }
+        );
 
 
-    menuButton.addEventListener(
-        "click",
-        () => {
+        document
+            .querySelectorAll(".nav-links a")
+            .forEach(link => {
 
-            navLinks.classList.toggle("active");
+                link.addEventListener(
+                    "click",
+                    () => {
 
-        }
-    );
+                        navLinks.classList.remove(
+                            "active"
+                        );
 
+                    }
+                );
 
-    navLinks
-        .querySelectorAll("a")
-        .forEach(link => {
+            });
 
-            link.addEventListener(
-                "click",
-                () => {
-
-                    navLinks.classList.remove(
-                        "active"
-                    );
-
-                }
-            );
-
-        });
-
-}
+    }
 
 
-/* =========================================
-   ACHIEVEMENTS
-========================================= */
 
-function renderAchievements() {
+    /* =================================================
+       RENDER ACHIEVEMENTS
+    ================================================= */
 
-    const timeline =
-        document.querySelector(".timeline");
+    function renderAchievements() {
 
-    if (!timeline) return;
-
-
-    timeline.innerHTML = "";
+        const timeline =
+            document.querySelector(".timeline");
 
 
-    achievements.forEach(
-        achievement => {
+        if (!timeline) return;
+
+
+        timeline.innerHTML = "";
+
+
+        achievements.forEach(achievement => {
 
             const item =
                 document.createElement("div");
+
 
             item.className =
                 "timeline-item";
@@ -262,38 +284,44 @@ function renderAchievements() {
 
             timeline.appendChild(item);
 
-        }
-    );
+        });
 
-}
-
-
-/* =========================================
-   POSTS
-========================================= */
-
-function renderPosts() {
-
-    const postsGrid =
-        document.querySelector(".posts-grid");
-
-    if (!postsGrid) return;
+    }
 
 
-    postsGrid.innerHTML = "";
+
+    /* =================================================
+       POST MODAL
+    ================================================= */
+
+    function openPost(post) {
+
+        const modal =
+            document.createElement("div");
 
 
-    posts.forEach(
-        (post, index) => {
-
-            const article =
-                document.createElement("article");
-
-            article.className =
-                "post-card";
+        modal.className =
+            "post-modal";
 
 
-            article.innerHTML = `
+        modal.innerHTML = `
+
+            <div class="post-modal-box">
+
+                <button
+                    class="close-post"
+                    aria-label="Close post"
+                >
+                    ×
+                </button>
+
+                <span class="post-category">
+                    ${post.category}
+                </span>
+
+                <span class="post-date">
+                    ${post.date}
+                </span>
 
                 ${
                     post.image
@@ -302,415 +330,471 @@ function renderPosts() {
                     <img
                         src="${post.image}"
                         alt="${post.title}"
-                        class="post-image"
+                        class="modal-post-image"
                     >
                     `
                     :
                     ""
                 }
 
-                <span class="post-date">
-                    ${post.date}
-                </span>
-
-                <span class="post-category">
-                    ${post.category}
-                </span>
-
-                <h3>
+                <h2>
                     ${post.title}
-                </h3>
+                </h2>
 
                 <p>
-                    ${post.excerpt}
+                    ${post.content}
                 </p>
-
-                <button
-                    class="read-post"
-                    data-post="${index}"
-                >
-                    READ MORE →
-                </button>
-
-            `;
-
-
-            postsGrid.appendChild(article);
-
-        }
-    );
-
-
-    postsGrid
-        .querySelectorAll(".read-post")
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    const index =
-                        Number(
-                            button.dataset.post
-                        );
-
-                    openPost(posts[index]);
-
-                }
-            );
-
-        });
-
-}
-
-
-/* =========================================
-   PROJECTS
-========================================= */
-
-function renderProjects() {
-
-    const projectsGrid =
-        document.querySelector(".projects-grid");
-
-    if (!projectsGrid) return;
-
-
-    projectsGrid.innerHTML = "";
-
-
-    projects.forEach(project => {
-
-        const article =
-            document.createElement("article");
-
-
-        article.className =
-            project.featured
-                ? "project-card featured"
-                : "project-card";
-
-
-        const imageHTML =
-            project.image
-            ?
-            `
-            <div class="project-image has-image">
-
-                <img
-                    src="${project.image}"
-                    alt="${project.title}"
-                >
-
-            </div>
-            `
-            :
-            `
-            <div class="project-image">
-
-                <span>
-                    ${project.title}
-                </span>
-
-            </div>
-            `;
-
-
-        const technologiesHTML =
-            project.technologies
-                .map(
-                    technology =>
-                        `<span>${technology}</span>`
-                )
-                .join("");
-
-
-        const githubHTML =
-            project.github &&
-            project.github !== "#"
-            ?
-            `
-            <a
-                href="${project.github}"
-                target="_blank"
-                rel="noopener"
-            >
-                GITHUB →
-            </a>
-            `
-            :
-            "";
-
-
-        const liveHTML =
-            project.live &&
-            project.live !== "#"
-            ?
-            `
-            <a
-                href="${project.live}"
-                target="_blank"
-                rel="noopener"
-            >
-                LIVE DEMO →
-            </a>
-            `
-            :
-            "";
-
-
-        article.innerHTML = `
-
-            ${imageHTML}
-
-            <div class="project-content">
-
-                <p class="project-type">
-                    ${project.category}
-                </p>
-
-                <h3>
-                    ${project.title}
-                </h3>
-
-                <p>
-                    ${project.description}
-                </p>
-
-                <div class="project-tags">
-
-                    ${technologiesHTML}
-
-                </div>
-
-                <div class="project-buttons">
-
-                    ${githubHTML}
-
-                    ${liveHTML}
-
-                </div>
 
             </div>
 
         `;
 
 
-        projectsGrid.appendChild(article);
-
-    });
-
-}
+        document.body.appendChild(modal);
 
 
-/* =========================================
-   POST MODAL
-========================================= */
-
-function openPost(post) {
-
-    if (!post) return;
+        document.body.style.overflow =
+            "hidden";
 
 
-    const modal =
-        document.createElement("div");
+        const closeModal = () => {
 
-    modal.className =
-        "post-modal";
+            modal.remove();
+
+            document.body.style.overflow =
+                "";
+
+        };
 
 
-    modal.innerHTML = `
+        const closeButton =
+            modal.querySelector(".close-post");
 
-        <div class="post-modal-box">
 
-            <button
-                class="close-post"
-                aria-label="Close post"
-            >
-                ×
-            </button>
+        if (closeButton) {
 
-            <span class="post-category">
-                ${post.category}
-            </span>
+            closeButton.addEventListener(
+                "click",
+                closeModal
+            );
 
-            <span class="post-date">
-                ${post.date}
-            </span>
+        }
 
-            ${
-                post.image
-                ?
-                `
-                <img
-                    src="${post.image}"
-                    alt="${post.title}"
-                    class="modal-post-image"
-                >
-                `
-                :
-                ""
+
+        modal.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target === modal
+                ) {
+
+                    closeModal();
+
+                }
+
             }
-
-            <h2>
-                ${post.title}
-            </h2>
-
-            <p>
-                ${post.content}
-            </p>
-
-        </div>
-
-    `;
+        );
 
 
-    document.body.appendChild(modal);
+        document.addEventListener(
+            "keydown",
+            function escapeHandler(event) {
 
-    document.body.style.overflow =
-        "hidden";
+                if (
+                    event.key === "Escape"
+                ) {
 
+                    closeModal();
 
-    function closeModal() {
+                    document.removeEventListener(
+                        "keydown",
+                        escapeHandler
+                    );
 
-        modal.remove();
+                }
 
-        document.body.style.overflow = "";
+            }
+        );
 
     }
 
 
-    modal
-        .querySelector(".close-post")
-        .addEventListener(
-            "click",
-            closeModal
-        );
+
+    /* =================================================
+       RENDER POSTS
+    ================================================= */
+
+    function renderPosts() {
+
+        const postsGrid =
+            document.querySelector(".posts-grid");
 
 
-    modal.addEventListener(
-        "click",
-        event => {
+        if (!postsGrid) return;
 
-            if (event.target === modal) {
 
-                closeModal();
+        postsGrid.innerHTML = "";
+
+
+        posts.forEach(
+            (post, index) => {
+
+                const article =
+                    document.createElement("article");
+
+
+                article.className =
+                    "post-card";
+
+
+                article.innerHTML = `
+
+                    ${
+                        post.image
+                        ?
+                        `
+                        <img
+                            src="${post.image}"
+                            alt="${post.title}"
+                            class="post-image"
+                        >
+                        `
+                        :
+                        ""
+                    }
+
+                    <span class="post-date">
+                        ${post.date}
+                    </span>
+
+                    <span class="post-category">
+                        ${post.category}
+                    </span>
+
+                    <h3>
+                        ${post.title}
+                    </h3>
+
+                    <p>
+                        ${post.excerpt}
+                    </p>
+
+                    <button
+                        class="read-post"
+                        data-post="${index}"
+                    >
+                        READ MORE →
+                    </button>
+
+                `;
+
+
+                postsGrid.appendChild(article);
 
             }
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   SCROLL REVEAL
-========================================= */
-
-function setupScrollReveal() {
-
-    const elements =
-        document.querySelectorAll(
-            ".section, .skill-card, .project-card, .post-card"
         );
 
 
-    if (!("IntersectionObserver" in window)) {
+        postsGrid
+            .querySelectorAll(".read-post")
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const index =
+                            Number(
+                                button.dataset.post
+                            );
+
+
+                        openPost(
+                            posts[index]
+                        );
+
+                    }
+                );
+
+            });
+
+    }
+
+
+
+    /* =================================================
+       RENDER PROJECTS
+    ================================================= */
+
+    function renderProjects() {
+
+        const projectsGrid =
+            document.querySelector(
+                ".projects-grid"
+            );
+
+
+        if (!projectsGrid) return;
+
+
+        projectsGrid.innerHTML = "";
+
+
+        projects.forEach(project => {
+
+            const article =
+                document.createElement("article");
+
+
+            article.className =
+                project.featured
+                ? "project-card featured"
+                : "project-card";
+
+
+            const imageHTML =
+                project.image
+                ?
+
+                `
+                <div class="project-image has-image">
+
+                    <img
+                        src="${project.image}"
+                        alt="${project.title}"
+                    >
+
+                </div>
+                `
+
+                :
+
+                `
+                <div class="project-image">
+
+                    <span>
+                        ${project.title}
+                    </span>
+
+                </div>
+                `;
+
+
+            const technologiesHTML =
+                project.technologies
+                    .map(
+                        technology =>
+                            `<span>${technology}</span>`
+                    )
+                    .join("");
+
+
+            const githubHTML =
+                project.github !== "#"
+                ?
+
+                `
+                <a
+                    href="${project.github}"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    GITHUB →
+                </a>
+                `
+
+                :
+
+                "";
+
+
+            const liveHTML =
+                project.live !== "#"
+                ?
+
+                `
+                <a
+                    href="${project.live}"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    LIVE DEMO →
+                </a>
+                `
+
+                :
+
+                "";
+
+
+            article.innerHTML = `
+
+                ${imageHTML}
+
+                <div class="project-content">
+
+                    <p class="project-type">
+                        ${project.category}
+                    </p>
+
+                    <h3>
+                        ${project.title}
+                    </h3>
+
+                    <p>
+                        ${project.description}
+                    </p>
+
+                    <div class="project-tags">
+
+                        ${technologiesHTML}
+
+                    </div>
+
+                    <div class="project-buttons">
+
+                        ${githubHTML}
+
+                        ${liveHTML}
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            projectsGrid.appendChild(article);
+
+        });
+
+    }
+
+
+
+    /* =================================================
+       SCROLL REVEAL
+    ================================================= */
+
+    function setupScrollReveal() {
+
+        const elements =
+            document.querySelectorAll(
+                ".section, .skill-card, .project-card, .post-card"
+            );
+
+
+        if (
+            !("IntersectionObserver" in window)
+        ) {
+
+            elements.forEach(
+                element => {
+
+                    element.classList.add(
+                        "visible"
+                    );
+
+                }
+            );
+
+            return;
+
+        }
+
+
+        const observer =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(
+                        entry => {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target.classList.add(
+                                    "visible"
+                                );
+
+
+                                observer.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+
+                {
+                    threshold: 0.12
+                }
+            );
+
 
         elements.forEach(element => {
 
             element.classList.add(
-                "reveal",
-                "visible"
+                "reveal"
+            );
+
+
+            observer.observe(
+                element
             );
 
         });
 
-        return;
+    }
+
+
+
+    /* =================================================
+       MOUSE GLOW
+    ================================================= */
+
+    const mouseGlow =
+        document.querySelector(
+            ".mouse-glow"
+        );
+
+
+    if (mouseGlow) {
+
+        document.addEventListener(
+            "mousemove",
+            event => {
+
+                mouseGlow.style.left =
+                    `${event.clientX}px`;
+
+
+                mouseGlow.style.top =
+                    `${event.clientY}px`;
+
+            }
+        );
 
     }
 
 
-    const observer =
-        new IntersectionObserver(
-            entries => {
 
-                entries.forEach(entry => {
+    /* =================================================
+       CARD SPOTLIGHT
+    ================================================= */
 
-                    if (entry.isIntersecting) {
-
-                        entry.target.classList.add(
-                            "visible"
-                        );
-
-                        observer.unobserve(
-                            entry.target
-                        );
-
-                    }
-
-                });
-
-            },
-            {
-                threshold: 0.12
-            }
-        );
-
-
-    elements.forEach(element => {
-
-        element.classList.add("reveal");
-
-        observer.observe(element);
-
-    });
-
-}
-
-
-/* =========================================
-   MOUSE GLOW
-========================================= */
-
-function setupMouseGlow() {
-
-    const mouseGlow =
-        document.querySelector(".mouse-glow");
-
-    if (!mouseGlow) return;
-
-
-    document.addEventListener(
-        "mousemove",
-        event => {
-
-            mouseGlow.style.left =
-                `${event.clientX}px`;
-
-            mouseGlow.style.top =
-                `${event.clientY}px`;
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   CARD SPOTLIGHT
-========================================= */
-
-function setupCardSpotlight() {
-
-    const cards =
+    const interactiveCards =
         document.querySelectorAll(
             ".skill-card, .project-card, .post-card"
         );
 
 
-    cards.forEach(card => {
+    interactiveCards.forEach(card => {
 
         card.addEventListener(
             "mousemove",
@@ -721,16 +805,20 @@ function setupCardSpotlight() {
 
 
                 const x =
-                    event.clientX - rect.left;
+                    event.clientX -
+                    rect.left;
+
 
                 const y =
-                    event.clientY - rect.top;
+                    event.clientY -
+                    rect.top;
 
 
                 card.style.setProperty(
                     "--mouse-x",
                     `${x}px`
                 );
+
 
                 card.style.setProperty(
                     "--mouse-y",
@@ -742,87 +830,94 @@ function setupCardSpotlight() {
 
     });
 
-}
 
 
-/* =========================================
-   BACKGROUND PARALLAX
-========================================= */
-
-function setupBackgroundParallax() {
+    /* =================================================
+       BACKGROUND PARALLAX
+    ================================================= */
 
     const heroArt =
-        document.querySelector(".hero-art");
-
-    if (!heroArt) return;
-
-
-    document.addEventListener(
-        "mousemove",
-        event => {
-
-            const x =
-                event.clientX /
-                window.innerWidth -
-                0.5;
+        document.querySelector(
+            ".hero-art"
+        );
 
 
-            const y =
-                event.clientY /
-                window.innerHeight -
-                0.5;
+    if (heroArt) {
+
+        document.addEventListener(
+            "mousemove",
+            event => {
+
+                const x =
+                    event.clientX /
+                    window.innerWidth -
+                    0.5;
 
 
-            heroArt.style.setProperty(
-                "--parallax-x",
-                `${x * -14}px`
-            );
+                const y =
+                    event.clientY /
+                    window.innerHeight -
+                    0.5;
 
 
-            heroArt.style.setProperty(
-                "--parallax-y",
-                `${y * -10}px`
-            );
-
-        }
-    );
+                heroArt.style.setProperty(
+                    "--parallax-x",
+                    `${x * -14}px`
+                );
 
 
-    window.addEventListener(
-        "scroll",
-        () => {
-
-            const scroll =
-                window.scrollY;
-
-
-            if (
-                scroll <
-                window.innerHeight
-            ) {
-
-                heroArt.style.backgroundPosition =
-                    `center ${50 + scroll * 0.025}%`;
+                heroArt.style.setProperty(
+                    "--parallax-y",
+                    `${y * -10}px`
+                );
 
             }
-
-        }
-    );
-
-}
+        );
 
 
-/* =========================================
-   HERO FADE
-========================================= */
+        window.addEventListener(
+            "scroll",
+            () => {
 
-function setupHeroFade() {
+                const scroll =
+                    window.scrollY;
+
+
+                if (
+                    scroll <
+                    window.innerHeight
+                ) {
+
+                    heroArt.style.backgroundPosition =
+                        `center ${
+                            50 +
+                            scroll *
+                            0.025
+                        }%`;
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================================
+       HERO SCROLL FADE
+    ================================================= */
 
     const heroContent =
-        document.querySelector(".hero-content");
+        document.querySelector(
+            ".hero-content"
+        );
+
 
     const heroCard =
-        document.querySelector(".hero-card");
+        document.querySelector(
+            ".hero-card"
+        );
 
 
     window.addEventListener(
@@ -833,10 +928,13 @@ function setupHeroFade() {
                 window.scrollY;
 
 
-            const fadeStart = 100;
+            const fadeStart =
+                100;
+
 
             const fadeEnd =
-                window.innerHeight * 0.8;
+                window.innerHeight *
+                0.8;
 
 
             let opacity =
@@ -850,7 +948,10 @@ function setupHeroFade() {
             opacity =
                 Math.max(
                     0,
-                    Math.min(1, opacity)
+                    Math.min(
+                        1,
+                        opacity
+                    )
                 );
 
 
@@ -858,6 +959,12 @@ function setupHeroFade() {
 
                 heroContent.style.opacity =
                     opacity;
+
+
+                heroContent.style.transform =
+                    `translateY(${
+                        scroll * 0.12
+                    }px)`;
 
             }
 
@@ -867,128 +974,46 @@ function setupHeroFade() {
                 heroCard.style.opacity =
                     opacity;
 
+
+                heroCard.style.transform =
+                    `
+                    rotate(2deg)
+                    translateY(${
+                        scroll * 0.08
+                    }px)
+                    `;
+
             }
 
         }
     );
 
-}
 
 
-/* =========================================
-   LOADING SCREEN
-========================================= */
+    /* =================================================
+       STATUS
+    ================================================= */
 
-function runLoadingScreen() {
-
-    const screen =
-        document.getElementById(
-            "loading-screen"
-        );
+    console.log(
+        "🦇 Auzair Mattoo Portfolio System Online."
+    );
 
 
-    const percent =
-        document.getElementById(
-            "loading-percent"
-        );
 
+    /* =================================================
+       RANDOM FLYING BATARANG
+    ================================================= */
 
-    const progress =
-        document.querySelector(
-            ".loader-progress"
-        );
-
-
-    if (!screen) {
-
-        console.error(
-            "ERROR: #loading-screen was not found."
-        );
-
-        return;
-
-    }
-
-
-    let value = 0;
-
-
-    const interval =
-        setInterval(
-            () => {
-
-                value +=
-                    Math.floor(
-                        Math.random() * 5
-                    ) + 2;
-
-
-                if (value >= 100) {
-
-                    value = 100;
-
-                    clearInterval(interval);
-
-                }
-
-
-                if (percent) {
-
-                    percent.textContent =
-                        value;
-
-                }
-
-
-                if (progress) {
-
-                    progress.style.width =
-                        `${value}%`;
-
-                }
-
-
-                if (value >= 100) {
-
-                    setTimeout(
-                        () => {
-
-                            screen.classList.add(
-                                "loaded"
-                            );
-
-
-                            startFlyingBatarang();
-
-                        },
-                        500
-                    );
-
-                }
-
-            },
-            50
-        );
-
-}
-
-
-/* =========================================
-   FLYING BATARANG
-========================================= */
-
-function setupFlyingBatarang() {
-
-    const batarang =
+    const flyingBatarang =
         document.getElementById(
             "flying-batarang"
         );
 
 
-    if (!batarang) return;
-
-
-    function random(min, max) {
+    function randomNumber(
+        min,
+        max
+    ) {
 
         return Math.random() *
             (max - min) +
@@ -997,161 +1022,257 @@ function setupFlyingBatarang() {
     }
 
 
-    function fly() {
+    function startFlyingBatarang() {
 
-        const width =
-            window.innerWidth;
-
-        const height =
-            window.innerHeight;
+        if (!flyingBatarang) return;
 
 
-        const startX =
-            random(-100, width);
+        function fly() {
+
+            const screenWidth =
+                window.innerWidth;
 
 
-        const startY =
-            random(80, height - 80);
+            const screenHeight =
+                window.innerHeight;
 
 
-        const endX =
-            random(-100, width + 100);
+            const startX =
+                randomNumber(
+                    -100,
+                    screenWidth
+                );
 
 
-        const endY =
-            random(80, height - 80);
+            const startY =
+                randomNumber(
+                    80,
+                    screenHeight - 80
+                );
 
 
-        const duration =
-            random(1800, 3200);
+            const endX =
+                randomNumber(
+                    -100,
+                    screenWidth + 100
+                );
 
 
-        const rotation =
-            random(360, 1080);
+            const endY =
+                randomNumber(
+                    80,
+                    screenHeight - 80
+                );
 
 
-        batarang.style.transition =
-            "none";
+            const rotation =
+                randomNumber(
+                    360,
+                    1080
+                );
 
 
-        batarang.style.left =
-            `${startX}px`;
+            const duration =
+                randomNumber(
+                    1800,
+                    3200
+                );
 
 
-        batarang.style.top =
-            `${startY}px`;
+            flyingBatarang.style.transition =
+                "none";
 
 
-        batarang.style.opacity =
-            "0";
+            flyingBatarang.style.left =
+                `${startX}px`;
 
 
-        batarang.style.transform =
-            "rotate(0deg)";
+            flyingBatarang.style.top =
+                `${startY}px`;
 
 
-        requestAnimationFrame(
-            () => {
-
-                batarang.style.transition =
-                    `
-                    left ${duration}ms cubic-bezier(.2,.7,.2,1),
-                    top ${duration}ms cubic-bezier(.2,.7,.2,1),
-                    transform ${duration}ms linear,
-                    opacity 350ms ease
-                    `;
+            flyingBatarang.style.opacity =
+                "0";
 
 
-                batarang.style.left =
-                    `${endX}px`;
+            requestAnimationFrame(
+                () => {
+
+                    flyingBatarang.style.transition =
+                        `
+                        left ${duration}ms cubic-bezier(.2,.7,.2,1),
+                        top ${duration}ms cubic-bezier(.2,.7,.2,1),
+                        transform ${duration}ms linear,
+                        opacity 350ms ease
+                        `;
 
 
-                batarang.style.top =
-                    `${endY}px`;
+                    flyingBatarang.style.opacity =
+                        "0.75";
 
 
-                batarang.style.opacity =
-                    "0.75";
+                    flyingBatarang.style.transform =
+                        `rotate(${rotation}deg)`;
 
 
-                batarang.style.transform =
-                    `rotate(${rotation}deg)`;
-
-            }
-        );
+                    flyingBatarang.style.left =
+                        `${endX}px`;
 
 
-        setTimeout(
-            () => {
+                    flyingBatarang.style.top =
+                        `${endY}px`;
 
-                batarang.style.opacity =
-                    "0";
-
-            },
-            duration - 300
-        );
+                }
+            );
 
 
-        setTimeout(
-            fly,
-            duration +
-            random(2500, 6500)
-        );
+            setTimeout(
+                () => {
+
+                    flyingBatarang.style.opacity =
+                        "0";
+
+                },
+                duration - 300
+            );
+
+
+            setTimeout(
+                fly,
+                duration +
+                randomNumber(
+                    2500,
+                    6500
+                )
+            );
+
+        }
+
+
+        fly();
 
     }
 
 
-    setTimeout(
-        fly,
-        1000
-    );
 
-}
+    /* =================================================
+       LOADING SCREEN
+    ================================================= */
 
+    function startLoadingScreen() {
 
-/* =========================================
-   INITIALIZE
-========================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        console.log(
-            "🦇 Auzair Mattoo Portfolio System Starting..."
-        );
+        const loadingScreen =
+            document.getElementById(
+                "loading-screen"
+            );
 
 
-        setupMobileMenu();
-
-        renderAchievements();
-
-        renderPosts();
-
-        renderProjects();
-
-        setupScrollReveal();
-
-        setupMouseGlow();
-
-        setupCardSpotlight();
-
-        setupBackgroundParallax();
-
-        setupHeroFade();
-
-        setupFlyingBatarang();
+        const loadingPercent =
+            document.getElementById(
+                "loading-percent"
+            );
 
 
-        /* Start loading AFTER everything exists */
+        const loadingProgress =
+            document.querySelector(
+                ".loader-progress"
+            );
 
-        runLoadingScreen();
+
+        if (
+            !loadingScreen ||
+            !loadingPercent ||
+            !loadingProgress
+        ) {
+
+            console.error(
+                "Loading screen elements are missing."
+            );
+
+            return;
+
+        }
 
 
-        console.log(
-            "🦇 Portfolio System Online."
-        );
+        let value = 0;
+
+
+        const interval =
+            setInterval(
+                () => {
+
+                    value +=
+                        Math.floor(
+                            Math.random() * 6
+                        ) + 1;
+
+
+                    if (value >= 100) {
+
+                        value = 100;
+
+                        clearInterval(
+                            interval
+                        );
+
+                    }
+
+
+                    loadingPercent.textContent =
+                        value;
+
+
+                    loadingProgress.style.width =
+                        `${value}%`;
+
+
+                    if (value === 100) {
+
+                        setTimeout(
+                            () => {
+
+                                loadingScreen.classList.add(
+                                    "loaded"
+                                );
+
+
+                                setTimeout(
+                                    () => {
+
+                                        startFlyingBatarang();
+
+                                    },
+                                    800
+                                );
+
+
+                            },
+                            500
+                        );
+
+                    }
+
+                },
+                45
+            );
 
     }
-);
-```
+
+
+
+    /* =================================================
+       START EVERYTHING
+    ================================================= */
+
+    renderAchievements();
+
+    renderPosts();
+
+    renderProjects();
+
+    setupScrollReveal();
+
+    startLoadingScreen();
+
+
+});
