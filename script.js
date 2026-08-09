@@ -6,7 +6,7 @@
 
 /* =====================================================
    CONTENT
-===================================================== */
+==================================================== */
 
 const achievements = [
 
@@ -156,7 +156,7 @@ const projects = [
 
 /* =====================================================
    START EVERYTHING AFTER HTML LOADS
-===================================================== */
+==================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* =====================================================
    MOBILE NAVIGATION
-===================================================== */
+==================================================== */
 
 function initializeNavigation() {
 
@@ -233,7 +233,7 @@ function initializeNavigation() {
 
 /* =====================================================
    ACHIEVEMENTS
-===================================================== */
+==================================================== */
 
 function renderAchievements() {
 
@@ -304,7 +304,7 @@ function renderAchievements() {
 
 /* =====================================================
    PROJECTS
-===================================================== */
+==================================================== */
 
 function renderProjects() {
 
@@ -462,7 +462,7 @@ function renderProjects() {
 
 /* =====================================================
    POSTS
-===================================================== */
+==================================================== */
 
 function renderPosts() {
 
@@ -540,7 +540,7 @@ function renderPosts() {
 
 /* =====================================================
    POST READER
-===================================================== */
+==================================================== */
 
 function initializePostReader() {
 
@@ -586,7 +586,7 @@ function initializePostReader() {
 
 /* =====================================================
    OPEN POST
-===================================================== */
+==================================================== */
 
 function openPost(post) {
 
@@ -702,7 +702,7 @@ function openPost(post) {
 
 /* =====================================================
    SCROLL REVEAL
-===================================================== */
+==================================================== */
 
 function initializeScrollReveal() {
 
@@ -767,7 +767,7 @@ function initializeScrollReveal() {
 
 /* =====================================================
    MOUSE GLOW
-===================================================== */
+==================================================== */
 
 function initializeMouseGlow() {
 
@@ -810,7 +810,7 @@ function initializeMouseGlow() {
 
 /* =====================================================
    CARD SPOTLIGHT
-===================================================== */
+==================================================== */
 
 function initializeCardSpotlight() {
 
@@ -857,7 +857,7 @@ function initializeCardSpotlight() {
 
 /* =====================================================
    BACKGROUND PARALLAX
-===================================================== */
+==================================================== */
 
 function initializeBackgroundParallax() {
 
@@ -918,7 +918,7 @@ function initializeBackgroundParallax() {
 
 /* =====================================================
    HERO FADE
-===================================================== */
+==================================================== */
 
 function initializeHeroFade() {
 
@@ -996,7 +996,7 @@ function initializeHeroFade() {
 }
 /* =====================================================
    CINEMATIC MUSIC SYSTEM
-===================================================== */
+==================================================== */
 
 function initializeMusicSystem() {
 
@@ -1050,6 +1050,100 @@ function initializeMusicSystem() {
 
 
     /* -------------------------------------------------
+       Robust playback helpers (overlay fallback)
+    ------------------------------------------------- */
+
+    function showEnableSoundOverlay() {
+        if (document.getElementById("enable-sound-overlay")) return;
+
+        const overlay = document.createElement("div");
+        overlay.id = "enable-sound-overlay";
+        overlay.style.cssText = [
+            "position:fixed",
+            "inset:0",
+            "display:flex",
+            "align-items:center",
+            "justify-content:center",
+            "background:rgba(0,0,0,0.6)",
+            "z-index:2000",
+            "backdrop-filter: blur(4px)"
+        ].join(";");
+
+        const box = document.createElement("div");
+        box.style.cssText = [
+            "background:#0b0b0b",
+            "color:#f1f1f1",
+            "padding:18px 24px",
+            "border-radius:8px",
+            "text-align:center",
+            "font-family:Inter, sans-serif",
+            "box-shadow:0 10px 40px rgba(0,0,0,0.6)"
+        ].join(";");
+
+        box.innerHTML = `<div style="margin-bottom:8px;font-weight:600">Enable sound</div>
+                         <div style="font-size:13px;color:#aaa;margin-bottom:14px">Click to enable ambient audio</div>`;
+
+        const btn = document.createElement("button");
+        btn.textContent = "Enable sound";
+        btn.style.cssText = [
+            "background:#f5c542",
+            "border:none",
+            "color:#000",
+            "padding:10px 16px",
+            "border-radius:6px",
+            "cursor:pointer",
+            "font-weight:700"
+        ].join(";");
+
+        btn.addEventListener("click", async () => {
+            try {
+                // attempt to play; this is a user gesture so should succeed
+                await music.play();
+
+                musicControl.classList.add("active");
+                const label = musicToggle.querySelector(".music-label");
+                if (label) label.textContent = "SOUND ON";
+
+                // smooth fade-in to the configured volume
+                const targetVolume = clamp01(Number(musicVolume.value));
+                let volume = 0;
+                const fadeIn = setInterval(() => {
+                    volume += 0.02;
+                    music.volume = Math.min(Math.max(0, volume), targetVolume);
+                    if (volume >= targetVolume) clearInterval(fadeIn);
+                }, 50);
+
+                // hide overlay
+                overlay.remove();
+                document.body.style.overflow = "";
+
+            } catch (err) {
+                console.error("Enable sound playback failed:", err);
+            }
+        });
+
+        box.appendChild(btn);
+        overlay.appendChild(box);
+        document.body.appendChild(overlay);
+        document.body.style.overflow = "hidden";
+    }
+
+    async function tryPlayWithFallback() {
+        try {
+            const p = music.play();
+            if (p !== undefined) await p;
+            // success
+            musicControl.classList.add("active");
+            const label = musicToggle.querySelector(".music-label");
+            if (label) label.textContent = "SOUND ON";
+            return true;
+        } catch (err) {
+            // blocked by browser autoplay policies
+            return false;
+        }
+    }
+
+    /* -------------------------------------------------
        ENTER THE NIGHT
     ------------------------------------------------- */
 
@@ -1059,80 +1153,34 @@ function initializeMusicSystem() {
 
             music.volume = 0;
 
-            await music.play();
+            const started = await tryPlayWithFallback();
 
-            musicControl.classList.add("active");
-
-            const label =
-                musicToggle.querySelector(".music-label");
-
-            if (label) {
-                label.textContent = "SOUND ON";
-            }
-
-
-            /* Smooth fade-in */
-
-            const targetVolume =
-                clamp01(Number(musicVolume.value));
-
-            let volume = 0;
-
-            const fadeIn =
-                setInterval(() => {
-
+            if (started) {
+                // Smooth fade-in
+                const targetVolume = clamp01(Number(musicVolume.value));
+                let volume = 0;
+                const fadeIn = setInterval(() => {
                     volume += 0.02;
-
-                    music.volume =
-                        Math.min(
-                            Math.max(0, volume),
-                            targetVolume
-                        );
-
-                    if (volume >= targetVolume) {
-
-                        clearInterval(fadeIn);
-
-                    }
-
+                    music.volume = Math.min(Math.max(0, volume), targetVolume);
+                    if (volume >= targetVolume) clearInterval(fadeIn);
                 }, 50);
 
+                // Close loading screen and start effects
+                if (loadingScreen) loadingScreen.classList.add("loaded");
 
-            /* Close loading screen */
+                setTimeout(() => startFlyingBatarang(), 800);
 
-            if (loadingScreen) {
-
-                loadingScreen.classList.add("loaded");
-
+            } else {
+                // Autoplay blocked - open site but show overlay so user can enable sound
+                if (loadingScreen) loadingScreen.classList.add("loaded");
+                showEnableSoundOverlay();
             }
-
-
-            /* Start flying batarang */
-
-            setTimeout(() => {
-
-                startFlyingBatarang();
-
-            }, 800);
-
 
         } catch (error) {
 
-            console.error(
-                "Music playback failed:",
-                error
-            );
+            console.error("Music playback failed:", error);
 
-            /*
-             * Even if the browser refuses
-             * the audio, the portfolio still opens.
-             */
-
-            if (loadingScreen) {
-
-                loadingScreen.classList.add("loaded");
-
-            }
+            if (loadingScreen) loadingScreen.classList.add("loaded");
 
         }
 
@@ -1148,35 +1196,18 @@ function initializeMusicSystem() {
         try {
 
             if (music.paused) {
-
-                await music.play();
-
-                const label =
-                    musicToggle.querySelector(".music-label");
-
-                if (label) {
-                    label.textContent = "SOUND ON";
-                }
-
+                const started = await tryPlayWithFallback();
+                if (!started) showEnableSoundOverlay();
             } else {
-
                 music.pause();
-
-                const label =
-                    musicToggle.querySelector(".music-label");
-
-                if (label) {
-                    label.textContent = "SOUND OFF";
-                }
-
+                const label = musicToggle.querySelector(".music-label");
+                if (label) label.textContent = "SOUND OFF";
             }
 
         } catch (error) {
 
-            console.error(
-                "Music playback failed:",
-                error
-            );
+            console.error("Music playback failed:", error);
+            showEnableSoundOverlay();
 
         }
 
@@ -1199,7 +1230,7 @@ function initializeMusicSystem() {
 
 /* =====================================================
    LOADING SCREEN
-===================================================== */
+==================================================== */
 
 function initializeLoadingScreen() {
 
@@ -1327,7 +1358,7 @@ function initializeLoadingScreen() {
 
 /* =====================================================
    RANDOM FLYING BATARANG
-===================================================== */
+==================================================== */
 
 function startFlyingBatarang() {
 
@@ -1472,4 +1503,5 @@ function startFlyingBatarang() {
     fly();
 
 }
+
 
