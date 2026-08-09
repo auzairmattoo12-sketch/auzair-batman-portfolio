@@ -1017,290 +1017,90 @@ function initializeMusicSystem() {
     const enterNight =
         document.getElementById("enter-night");
 
+    const loadingScreen =
+        document.getElementById("loading-screen");
 
-    /*
-       IMPORTANT:
-       If anything is missing, simply stop the
-       music system. NEVER stop the portfolio.
-    */
 
-    if (!music || !musicToggle || !musicVolume ||
-        !musicControl || !enterNight) {
+    if (
+        !music ||
+        !musicToggle ||
+        !musicVolume ||
+        !musicControl ||
+        !enterNight
+    ) {
 
-        console.warn(
-            "Music system unavailable. Portfolio will continue normally."
-        );
+        console.error("Music system elements missing.");
 
         return;
     }
 
 
-    /* Default volume */
-
-    music.volume = 0.28;
-
-
-    /* =================================================
-       ENTER THE NIGHT
-    ================================================= */
-
-    enterNight.addEventListener("click", function () {
-
-        /*
-           Start music only after user interaction.
-        */
-
-        music.volume = 0;
-
-        const playPromise =
-            music.play();
-
-
-        if (playPromise !== undefined) {
-
-            playPromise
-                .then(() => {
-
-                    musicControl.classList.add("active");
-
-                    musicToggle
-                        .querySelector(".music-label")
-                        .textContent =
-                        "SOUND ON";
-
-
-                    /* Fade music in */
-
-                    let volume = 0;
-
-                    const fade =
-                        setInterval(() => {
-
-                            volume += 0.01;
-
-                            music.volume =
-                                Math.min(
-                                    volume,
-                                    Number(
-                                        musicVolume.value
-                                    )
-                                );
-
-
-                            if (
-                                volume >=
-                                Number(
-                                    musicVolume.value
-                                )
-                            ) {
-
-                                clearInterval(fade);
-
-                            }
-
-                        }, 40);
-
-                })
-                .catch(error => {
-
-                    console.warn(
-                        "Music could not play:",
-                        error
-                    );
-
-                });
-
-        }
-
-
-        /*
-           Close loading screen regardless of
-           whether the music works.
-        */
-
-        const loadingScreen =
-            document.getElementById(
-                "loading-screen"
-            );
-
-
-        if (loadingScreen) {
-
-            loadingScreen.classList.add(
-                "loaded"
-            );
-
-        }
-
-
-        /*
-           Start flying Batarang.
-        */
-
-        setTimeout(() => {
-
-            startFlyingBatarang();
-
-        }, 800);
-
-    });
-
-
-    /* =================================================
-       PLAY / PAUSE
-    ================================================= */
-
-    musicToggle.addEventListener(
-        "click",
-        function () {
-
-            if (music.paused) {
-
-                music.play()
-                    .then(() => {
-
-                        musicToggle
-                            .querySelector(".music-label")
-                            .textContent =
-                            "SOUND ON";
-
-                    })
-                    .catch(error => {
-
-                        console.warn(
-                            "Music could not play:",
-                            error
-                        );
-
-                    });
-
-            } else {
-
-                music.pause();
-
-                musicToggle
-                    .querySelector(".music-label")
-                    .textContent =
-                    "SOUND OFF";
-
-            }
-
-        }
-    );
-
-
-    /* =================================================
-       VOLUME
-    ================================================= */
-
-    musicVolume.addEventListener(
-        "input",
-        function () {
-
-            music.volume =
-                Number(
-                    musicVolume.value
-                );
-
-        }
-    );
-
-}
-
     /* -------------------------------------------------
        DEFAULT VOLUME
     ------------------------------------------------- */
 
-    music.volume =
-        Number(musicVolume.value);
+    music.volume = Number(musicVolume.value);
 
 
     /* -------------------------------------------------
        ENTER THE NIGHT
     ------------------------------------------------- */
 
-    enterNight.addEventListener(
-        "click",
-        async () => {
+    enterNight.addEventListener("click", async () => {
 
-            try {
+        try {
 
-                music.volume = 0;
+            music.volume = 0;
 
-                await music.play();
+            await music.play();
 
-                musicControl.classList.add(
-                    "active"
-                );
+            musicControl.classList.add("active");
 
-                musicToggle
-                    .querySelector(".music-label")
-                    .textContent =
-                    "SOUND ON";
+            const label =
+                musicToggle.querySelector(".music-label");
 
-
-                /* Smooth fade-in */
-
-                let volume = 0;
-
-                const fadeIn =
-                    setInterval(() => {
-
-                        volume += 0.01;
-
-                        music.volume =
-                            Math.min(
-                                volume,
-                                Number(
-                                    musicVolume.value
-                                )
-                            );
-
-
-                        if (
-                            volume >=
-                            Number(
-                                musicVolume.value
-                            )
-                        ) {
-
-                            clearInterval(
-                                fadeIn
-                            );
-
-                        }
-
-                    }, 45);
-
-
-            } catch (error) {
-
-                console.warn(
-                    "Music could not start:",
-                    error
-                );
-
+            if (label) {
+                label.textContent = "SOUND ON";
             }
+
+
+            /* Smooth fade-in */
+
+            const targetVolume =
+                Number(musicVolume.value);
+
+            let volume = 0;
+
+            const fadeIn =
+                setInterval(() => {
+
+                    volume += 0.02;
+
+                    music.volume =
+                        Math.min(
+                            volume,
+                            targetVolume
+                        );
+
+                    if (volume >= targetVolume) {
+
+                        clearInterval(fadeIn);
+
+                    }
+
+                }, 50);
 
 
             /* Close loading screen */
 
-            const loadingScreen =
-                document.getElementById(
-                    "loading-screen"
-                );
-
-
             if (loadingScreen) {
 
-                loadingScreen.classList.add(
-                    "loaded"
-                );
+                loadingScreen.classList.add("loaded");
 
             }
 
 
-            /* Start flying Batarang */
+            /* Start flying batarang */
 
             setTimeout(() => {
 
@@ -1308,59 +1108,88 @@ function initializeMusicSystem() {
 
             }, 800);
 
+
+        } catch (error) {
+
+            console.error(
+                "Music playback failed:",
+                error
+            );
+
+            /*
+             * Even if the browser refuses
+             * the audio, the portfolio still opens.
+             */
+
+            if (loadingScreen) {
+
+                loadingScreen.classList.add("loaded");
+
+            }
+
         }
-    );
+
+    });
 
 
     /* -------------------------------------------------
        PLAY / PAUSE
     ------------------------------------------------- */
 
-    musicToggle.addEventListener(
-        "click",
-        () => {
+    musicToggle.addEventListener("click", async () => {
+
+        try {
 
             if (music.paused) {
 
-                music.play();
+                await music.play();
 
-                musicToggle
-                    .querySelector(".music-label")
-                    .textContent =
-                    "SOUND ON";
+                const label =
+                    musicToggle.querySelector(".music-label");
+
+                if (label) {
+                    label.textContent = "SOUND ON";
+                }
 
             } else {
 
                 music.pause();
 
-                musicToggle
-                    .querySelector(".music-label")
-                    .textContent =
-                    "SOUND OFF";
+                const label =
+                    musicToggle.querySelector(".music-label");
+
+                if (label) {
+                    label.textContent = "SOUND OFF";
+                }
 
             }
 
+        } catch (error) {
+
+            console.error(
+                "Music playback failed:",
+                error
+            );
+
         }
-    );
+
+    });
 
 
     /* -------------------------------------------------
        VOLUME
     ------------------------------------------------- */
 
-    musicVolume.addEventListener(
-        "input",
-        () => {
+    musicVolume.addEventListener("input", () => {
 
-            music.volume =
-                Number(
-                    musicVolume.value
-                );
+        music.volume =
+            Number(musicVolume.value);
 
-        }
-    );
+    });
 
 }
+
+    
 
 /* =====================================================
    LOADING SCREEN
