@@ -662,3 +662,44 @@ interactiveCards.forEach(card => {
     });
 
 });
+/* =========================================
+   CINEMATIC BACKGROUND PARALLAX
+========================================= */
+
+const heroArt =
+    document.querySelector(".hero-art");
+
+if (heroArt) {
+
+    document.addEventListener(
+        "mousemove",
+        event => {
+
+            const x =
+                (event.clientX /
+                    window.innerWidth) - 0.5;
+
+            const y =
+                (event.clientY /
+                    window.innerHeight) - 0.5;
+
+            const moveX =
+                x * -14;
+
+            const moveY =
+                y * -10;
+
+            heroArt.style.setProperty(
+                "--parallax-x",
+                `${moveX}px`
+            );
+
+            heroArt.style.setProperty(
+                "--parallax-y",
+                `${moveY}px`
+            );
+
+        }
+    );
+
+}
