@@ -160,7 +160,7 @@ const projects = [
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    
+    initializeMusicSystem();
    
     initializeNavigation();
 
