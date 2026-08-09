@@ -21,6 +21,40 @@
 </head>
 
 <body>
+   
+    <!-- =====================================================
+     CINEMATIC MUSIC SYSTEM
+===================================================== -->
+
+<audio
+    id="background-music"
+    src="assets/music/mysterious-dark-ambient.mp3"
+    loop
+    preload="auto"
+></audio>
+
+<div id="music-control" class="music-control">
+
+    <button
+        id="music-toggle"
+        type="button"
+        aria-label="Toggle music"
+    >
+        <span class="music-icon">♫</span>
+        <span class="music-label">SOUND ON</span>
+    </button>
+
+    <input
+        id="music-volume"
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        value="0.28"
+        aria-label="Music volume"
+    >
+
+</div>
 
 <!-- =====================================================
      LOADING SCREEN
