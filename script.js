@@ -160,6 +160,8 @@ const projects = [
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    initializeMusicSystem();
+   
     initializeNavigation();
 
     renderAchievements();
@@ -994,7 +996,199 @@ function initializeHeroFade() {
     );
 
 }
+/* =====================================================
+   CINEMATIC MUSIC SYSTEM
+===================================================== */
 
+function initializeMusicSystem() {
+
+    const music =
+        document.getElementById("background-music");
+
+    const musicToggle =
+        document.getElementById("music-toggle");
+
+    const musicVolume =
+        document.getElementById("music-volume");
+
+    const musicControl =
+        document.getElementById("music-control");
+
+    const enterNight =
+        document.getElementById("enter-night");
+
+
+    if (
+        !music ||
+        !musicToggle ||
+        !musicVolume ||
+        !musicControl ||
+        !enterNight
+    ) {
+
+        console.error(
+            "Music system elements missing."
+        );
+
+        return;
+
+    }
+
+
+    /* -------------------------------------------------
+       DEFAULT VOLUME
+    ------------------------------------------------- */
+
+    music.volume =
+        Number(musicVolume.value);
+
+
+    /* -------------------------------------------------
+       ENTER THE NIGHT
+    ------------------------------------------------- */
+
+    enterNight.addEventListener(
+        "click",
+        async () => {
+
+            try {
+
+                music.volume = 0;
+
+                await music.play();
+
+                musicControl.classList.add(
+                    "active"
+                );
+
+                musicToggle
+                    .querySelector(".music-label")
+                    .textContent =
+                    "SOUND ON";
+
+
+                /* Smooth fade-in */
+
+                let volume = 0;
+
+                const fadeIn =
+                    setInterval(() => {
+
+                        volume += 0.01;
+
+                        music.volume =
+                            Math.min(
+                                volume,
+                                Number(
+                                    musicVolume.value
+                                )
+                            );
+
+
+                        if (
+                            volume >=
+                            Number(
+                                musicVolume.value
+                            )
+                        ) {
+
+                            clearInterval(
+                                fadeIn
+                            );
+
+                        }
+
+                    }, 45);
+
+
+            } catch (error) {
+
+                console.warn(
+                    "Music could not start:",
+                    error
+                );
+
+            }
+
+
+            /* Close loading screen */
+
+            const loadingScreen =
+                document.getElementById(
+                    "loading-screen"
+                );
+
+
+            if (loadingScreen) {
+
+                loadingScreen.classList.add(
+                    "loaded"
+                );
+
+            }
+
+
+            /* Start flying Batarang */
+
+            setTimeout(() => {
+
+                startFlyingBatarang();
+
+            }, 800);
+
+        }
+    );
+
+
+    /* -------------------------------------------------
+       PLAY / PAUSE
+    ------------------------------------------------- */
+
+    musicToggle.addEventListener(
+        "click",
+        () => {
+
+            if (music.paused) {
+
+                music.play();
+
+                musicToggle
+                    .querySelector(".music-label")
+                    .textContent =
+                    "SOUND ON";
+
+            } else {
+
+                music.pause();
+
+                musicToggle
+                    .querySelector(".music-label")
+                    .textContent =
+                    "SOUND OFF";
+
+            }
+
+        }
+    );
+
+
+    /* -------------------------------------------------
+       VOLUME
+    ------------------------------------------------- */
+
+    musicVolume.addEventListener(
+        "input",
+        () => {
+
+            music.volume =
+                Number(
+                    musicVolume.value
+                );
+
+        }
+    );
+
+}
 
 /* =====================================================
    LOADING SCREEN
