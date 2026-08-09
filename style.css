@@ -1548,3 +1548,379 @@ footer {
         rgba(245,197,66,0.2);
 
 }
+/* =========================================
+   CINEMATIC BAT-SIGNAL
+========================================= */
+
+.bat-signal-effect {
+
+    position: fixed;
+
+    width: 600px;
+    height: 600px;
+
+    left: 50%;
+    top: 18%;
+
+    transform: translate(-50%, -50%);
+
+    pointer-events: none;
+
+    z-index: -5;
+
+    opacity: 0.12;
+
+    animation:
+        signalPulse 5s ease-in-out infinite;
+
+}
+
+.bat-signal-effect::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(245, 197, 66, 0.15),
+            rgba(245, 197, 66, 0.04) 35%,
+            transparent 70%
+        );
+
+    filter: blur(10px);
+
+}
+
+.bat-symbol {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 170px;
+
+    filter:
+        grayscale(1)
+        brightness(2);
+
+    opacity: 0.15;
+
+    transform:
+        rotate(-3deg)
+        scale(1.1);
+
+}
+
+@keyframes signalPulse {
+
+    0%,
+    100% {
+
+        opacity: 0.07;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.95);
+
+    }
+
+    50% {
+
+        opacity: 0.14;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.05);
+
+    }
+
+}
+
+
+/* =========================================
+   MOUSE FOLLOW GLOW
+========================================= */
+
+.mouse-glow {
+
+    position: fixed;
+
+    width: 280px;
+    height: 280px;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: 9999;
+
+    transform:
+        translate(-50%, -50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(245,197,66,0.08),
+            transparent 70%
+        );
+
+    filter: blur(10px);
+
+    transition:
+        left 0.12s ease,
+        top 0.12s ease;
+
+}
+
+
+/* =========================================
+   CARD SPOTLIGHT
+========================================= */
+
+.skill-card,
+.project-card,
+.post-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+.skill-card::before,
+.project-card::before,
+.post-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 250px;
+    height: 250px;
+
+    left: var(--mouse-x, 50%);
+    top: var(--mouse-y, 50%);
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(245,197,66,0.08),
+            transparent 70%
+        );
+
+    opacity: 0;
+
+    transition: opacity 0.3s ease;
+
+    pointer-events: none;
+
+}
+
+.skill-card:hover::before,
+.project-card:hover::before,
+.post-card:hover::before {
+
+    opacity: 1;
+
+}
+
+
+/* =========================================
+   STATUS PULSE
+========================================= */
+
+.status-dot {
+
+    animation:
+        statusPulse 2s infinite;
+
+}
+
+@keyframes statusPulse {
+
+    0% {
+
+        box-shadow:
+            0 0 0 0
+            rgba(245,197,66,0.5);
+
+    }
+
+    70% {
+
+        box-shadow:
+            0 0 0 10px
+            rgba(245,197,66,0);
+
+    }
+
+    100% {
+
+        box-shadow:
+            0 0 0 0
+            rgba(245,197,66,0);
+
+    }
+
+}
+
+
+/* =========================================
+   CINEMATIC SECTION DIVIDERS
+========================================= */
+
+.section {
+
+    position: relative;
+
+}
+
+.section::after {
+
+    content: "";
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 10%;
+
+    width: 80%;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #222,
+            transparent
+        );
+
+}
+
+
+/* =========================================
+   HERO TITLE GLOW
+========================================= */
+
+.hero h1 {
+
+    text-shadow:
+        0 0 40px
+        rgba(255,255,255,0.02);
+
+}
+
+.hero h1 span {
+
+    text-shadow:
+        0 0 30px
+        rgba(245,197,66,0.04);
+
+}
+
+
+/* =========================================
+   BUTTON SHINE
+========================================= */
+
+.btn {
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+.btn::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: -100%;
+
+    width: 50%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,0.18),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+}
+
+.btn:hover::after {
+
+    animation:
+        buttonShine 0.7s ease;
+
+}
+
+@keyframes buttonShine {
+
+    from {
+        left: -100%;
+    }
+
+    to {
+        left: 150%;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE PERFORMANCE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .mouse-glow {
+
+        display: none;
+
+    }
+
+    .bat-signal-effect {
+
+        width: 400px;
+        height: 400px;
+
+        top: 20%;
+
+    }
+
+    .bat-symbol {
+
+        font-size: 100px;
+
+    }
+
+}
