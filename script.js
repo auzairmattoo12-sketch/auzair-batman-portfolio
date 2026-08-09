@@ -789,3 +789,84 @@ window.addEventListener(
 
     }
 );
+/* =========================================
+   CINEMATIC LOADING SYSTEM
+========================================= */
+
+const loadingScreen =
+    document.getElementById("loading-screen");
+
+const loadingPercent =
+    document.getElementById("loading-percent");
+
+const loadingProgress =
+    document.querySelector(".loader-progress");
+
+
+let loadingValue = 0;
+
+
+function runLoadingScreen() {
+
+    const loadingInterval =
+        setInterval(() => {
+
+            loadingValue +=
+                Math.floor(
+                    Math.random() * 7
+                ) + 1;
+
+
+            if (loadingValue >= 100) {
+
+                loadingValue = 100;
+
+                clearInterval(
+                    loadingInterval
+                );
+
+
+                loadingPercent.textContent =
+                    loadingValue;
+
+                loadingProgress.style.width =
+                    `${loadingValue}%`;
+
+
+                setTimeout(() => {
+
+                    loadingScreen.classList.add(
+                        "loaded"
+                    );
+
+                    setTimeout(() => {
+
+                        startFlyingBatarang();
+
+                    }, 900);
+
+                }, 400);
+
+
+                return;
+
+            }
+
+
+            loadingPercent.textContent =
+                loadingValue;
+
+            loadingProgress.style.width =
+                `${loadingValue}%`;
+
+
+        }, 45);
+
+}
+
+
+if (loadingScreen) {
+
+    runLoadingScreen();
+
+}
