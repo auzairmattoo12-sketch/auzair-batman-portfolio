@@ -1266,27 +1266,24 @@ function initializeLoadingScreen() {
             progress.style.width =
                 `${value}%`;
 
+if (value === 100) {
 
-            if (value === 100) {
+    setTimeout(() => {
 
-                setTimeout(() => {
+        const enterNight =
+            document.getElementById(
+                "enter-night"
+            );
 
-                    screen.classList.add(
-                        "loaded"
-                    );
+        if (enterNight) {
 
+            enterNight.classList.add(
+                "visible"
+            );
 
-                    setTimeout(() => {
+        }
 
-                        startFlyingBatarang();
-
-                    }, 800);
-
-                }, 500);
-
-            }
-
-        }, 45);
+    }, 500);
 
 }
 
